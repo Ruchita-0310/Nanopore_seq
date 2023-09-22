@@ -28,12 +28,24 @@ ont-dorado-server/bin/dorado_basecall_server --print_workflows
 ```
 FLO-MIN106     SQK-LSK109                  dna_r9.4.1_450bps_hac          invalid model file
 
-Start Dorado server
+Start run Dorado on ARC server
 ```
+nano run_dorado.sbatch #to create a script to run it on ARC
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=1
+#SBATCH --time=01:00:00
+#SBATCH --mem=1G
+#SBATCH --partition=cpu2019
+####### Run your script #########################
 ont-dorado-server/bin/dorado_basecall_server --log_path output_folder/server_logs --config dna_r9.4.1_450bps_hac.cfg -p 5555
-```
-
-Start Dorado client
-```
 ls *.pod5 | ont-dorado-server/bin/ont_basecall_client --save_path output_folder/basecall -c dna_r9.4.1_450bps_hac.cfg --port 5555
+```
+To know the status
+```
+tail -f slurm-23027071.out 
+squeue -u ruchita.solanki
+watch squeue -u ruchita.solanki
 ```
