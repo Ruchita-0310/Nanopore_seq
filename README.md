@@ -43,6 +43,11 @@ nano run_dorado.sbatch #to create a script to run it on ARC
 ont-dorado-server/bin/dorado_basecall_server --log_path output_folder/server_logs --config dna_r9.4.1_450bps_hac.cfg -p 5555
 ls *.pod5 | ont-dorado-server/bin/ont_basecall_client --save_path output_folder/basecall -c dna_r9.4.1_450bps_hac.cfg --port 5555
 ```
+To run the script on ARC
+```
+sbatch run_dorado.sbatch
+```
+
 To know the status
 ```
 tail -f slurm-23027071.out 
