@@ -156,48 +156,7 @@ If you only specify the parameters listed above, Dorado Basecall Server will run
 
 For a full list of all the optional parameters and their default values, refer to the “Setting up a run: configurations and parameters” section of the protocol.
 
-## Running Dorado Basecall Server on Windows
-
-### Command prompt:
-
-Launch a command prompt. To do this, click on Start and type "Command prompt" in the search box, then click the link. You will be running all operations from here:
-
-![.](img/win_cmd.png)
-
-### Simplex sequencing: command-line entries for basecalling
-
-The following examples assume the Dorado package was extracted to `C:\ont-dorado-server`.
-To basecall simplex reads with Dorado Basecall Server, you will need to use the following commands:
-
--   `"C:\ont-dorado-server\bin\dorado_basecall_server.exe"` to start a basecall server
--   The server will remain running and not return to the prompt, so start a new command prompt.
--   `"C:\ont-dorado-server\bin\ont_basecall_client.exe"` to start a client
-
-**EXAMPLE**
-
-### Simplex Sequencing: Example command-line entries for basecalling an SQK-LSK114 kit with a FLO-MIN114 flow cell experiment
-
-```
-C:\ont-dorado-server\bin\dorado_basecall_server.exe --log_path output_folder\server_logs --config dna_r10.4.1_e8.2_400bps_hac.cfg -p 5555
-```
-
-then
-
-```
-"C:\ont-dorado-server\bin\ont_basecall_client.exe" --input_path reads --save_path output_folder\basecall --config dna_r10.4.1_e8.2_400bps_hac.cfg -p 5555
-```
-
-or
-
-```
-"C:\ont-dorado-server\bin\ont_basecall_client.exe" --input_path C:\my_folder\reads --save_path C:\output_folder\basecall --flowcell FLO-MIN114 --kit SQK-LSK114 -p 5555
-```
-
 **IMPORTANT**
-
-### Dorado Basecall Server executable in Windows:
-
-By default, the Dorado executables (such as `dorado_basecall_server.exe`) will not be on the Windows file path. As a result, you will need to type the full path directory to use an executable.
 
 ##   Run Dorado Basecall Server on Linux
 
@@ -244,55 +203,6 @@ On Linux-based platforms, it is also possible to enter files into the basecall c
 
 ```
 ls input_folder/*.fast5 | ont_basecall_client --save_path output_folder/basecall --config dna_r10.4.1_e8.2_400bps_hac.cfg
-```
-
-
-## Run Dorado Basecall Server on macOS
-
-### Command prompt:
-
-Open a command-line terminal. Open your Applications folder, then open the Utilities folder. Click on the Terminal application to open:
-
-![.](img/osx_cmd.png)
-
-**IMPORTANT**
-
-### Before starting:
-
-You must find where the unzipped 'dorado archive' is located – this will give you the path you will need to enter in order to run the basecalling executables.
-
-For example, if you extracted the .zip archive to `/Users/myuser/ont-dorado-server`, then you can run the basecall server using this:
-
-```
-/Users/myuser/ont-dorado-server/bin/dorado_basecall_server
-```
-
-### Simplex Sequencing: Command-line entries for basecalling
-
-To basecall simplex reads with Dorado Basecall Server, you will need to use the following commands:
-
--   `"/Users/myuser/ont-dorado-server/bin/dorado_basecall_server"` to start a basecall server
--   The server will remain running and not return to the prompt, so start a new command prompt.
--   `"/Users/myuser/ont-dorado-server/bin/ont_basecall_client"` to start a client
-
-***EXAMPLE***
-
-### Simplex Sequencing: Example command-line entries for basecalling a SQK-LSK114 kit with a FLO-MIN114 flow cell experiment
-
-```
-/Users/myuser/ont-dorado-server/bin/dorado_basecall_server --log_path output_folder/server_logs --config dna_r10.4.1_e8.2_400bps_hac.cfg -p 5555
-```
-
-then
-
-```
-/Users/myuser/ont-dorado-server/bin/ont_basecall_client  --input_path /data/my_folder/reads --save_path /data/output_folder/basecall --flowcell FLO-MIN114 --kit SQK-LSK114 -p 5555
-```
-
-or
-
-```
-/Users/myuser/ont-dorado-server/bin/ont_basecall_client  --input_path reads --save_path output_folder/basecall --config dna_r10.4.1_e8.2_400bps_hac.cfg -p 5555
 ```
 
 ## General help command-line options
@@ -407,7 +317,6 @@ FLO-MIN106     SQK-RBK112-96     included  dna_r9.4.1_e8.1_hac            2021-0
 FLO-PRO111     SQK-CS9109                  dna_r10.3_450bps_hac_prom      2021-04-20_dna_r10.3_minion_promethion_384_72309afc
 FLO-PRO111     SQK-DCS108                  dna_r10.3_450bps_hac_prom      2021-04-20_dna_r10.3_minion_promethion_384_72309afc
 FLO-PRO111     SQK-DCS109                  dna_r10.3_450bps_hac_prom      2021-04-20_dna_r10.3_minion_promethion_384_72309afc
-[...]
 ```
 
 When kits come with barcodes included, the barcoding column will specify "included". Reads which have been prepared with these kits can be demultiplexed using `ont_barcoder` (see below).
