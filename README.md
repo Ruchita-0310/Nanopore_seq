@@ -34,10 +34,10 @@ nano run_dorado.sbatch #to create a script to run it on ARC
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=1
-#SBATCH --time=01:00:00
-#SBATCH --mem=1G
+#SBATCH --ntasks=4
+#SBATCH --cpus-per-task=4
+#SBATCH --time=048:00:00
+#SBATCH --mem=5G
 #SBATCH --partition=cpu2019
 ####### Run your script #########################
 ont-dorado-server/bin/dorado_basecall_server --log_path output_folder/server_logs --config dna_r9.4.1_450bps_hac.cfg -p 5555
