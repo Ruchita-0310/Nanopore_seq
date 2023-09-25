@@ -110,17 +110,6 @@ Note: Dorado Basecall Server only supports GPUs with an [NVIDIA compute version]
 2.  Extract the archive to the desired location.
 3.  (Optional) Add the install location's <path>/bin subfolder to the system path, so executables can be called from any working folder.
 
-## Installing Dorado Basecall Server on macOS
-
-### Supported platforms:
-
-Operating system:
--   Intel Mac: 64-bit OSX 10.15 (Catalina) or higher (Note that Intel mac support is limited to CPU only basecalling).
--   Apple Silicon (Arm M1/M2) Mac: 64-bit OSX 12.0 (Monterey) or higher (CPU or GPU-accelerated basecalling).
-
-1.  Download the .zip archive. This can be found on the [Software Downloads](https://community.nanoporetech.com/downloads) page in the Community.
-2.  Extract the archive to a location of your choice. Note: You may require Administrator access depending on the location into which you unzip the archive.
-
 # Quick Start
 
 ## Running Dorado Basecall Server
