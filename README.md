@@ -57,6 +57,8 @@ watch squeue -u ruchita.solanki
 NanoPlot produces read length histograms, cumulative yield plots, violin plots of read length and quality over time and bivariate plots comparing the relationship between read
 lengths, quality scores, reference identity and read mapping quality.
 ```
-module load bioconda/conda
-conda install -n nanopore_analysis -c bioconda nanoplot #I used conda
+module load biobuilds/conda
+conda install -n nanopore_analysis -c bioconda nanoplot #I used conda and nanopore_analysis is a new env I created
+echo "conda activate" >> ~/.bashrc #to activate the path 
 ```
+Nanoplot will be saved in /home/ruchita.solanki/.conda/envs/nanopore_analysis
