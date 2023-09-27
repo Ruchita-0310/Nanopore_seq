@@ -1,10 +1,9 @@
 # Installing and running softwares on ARC using conda and pip
 ## Filtlong
 ```
-git clone https://github.com/rrwick/Filtlong.git
-cd Filtlong
-make -j
-bin/filtlong -h
+conda create --name filtlong -c bioconda filtlong
+conda activate filtlong
+
 ```
 To run filtlong
 ```
