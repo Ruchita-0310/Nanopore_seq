@@ -53,21 +53,17 @@ tail -f slurm_file_name.out
 squeue -u ruchita.solanki
 watch squeue -u ruchita.solanki
 ```
-# Installing softwares on ARC using conda
-## NanoPlot 
-NanoPlot produces read length histograms, cumulative yield plots, violin plots of read length and quality over time and bivariate plots comparing the relationship between read
-lengths, quality scores, reference identity and read mapping quality.
+# Installing and running softwares on ARC using conda and pip
+## Filtlong
 ```
-module load biobuilds/conda
-conda install -n nanopore_analysis -c bioconda nanoplot #nanopore_analysis is a new env I created
-echo "conda activate" >> ~/.bashrc #to activate the path
-conda activate nanopore_analysis #to activate the env (should look something like this - (nanopore_analysis) [ruchita.solanki@arc Ruchita_working]$ )
-cat *.fastq.gz > passed_reads.fastq.gz #concatenating all passed fastq.gz file 
-NanoPlot -
+git clone https://github.com/rrwick/Filtlong.git
+cd Filtlong
+make -j
+bin/filtlong -h
 ```
-Nanoplot will be saved in /home/ruchita.solanki/.conda/envs/nanopore_analysis
-## Chopper
+To run filtlong
 ```
+../Filtlong/bin/filtlong passed_reads.fastq.gz --min_mean_q 7 | gzip > filtlong_output.fastq 
 ```
 ## Flye
 ```
@@ -76,4 +72,5 @@ flye -
 ```
 ## Medaka
 ```
+pip install medaka
 ```
