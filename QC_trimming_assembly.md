@@ -1,14 +1,12 @@
 # Installing and running softwares on ARC using conda and pip
 ## Filtlong
 ```
-conda create --name filtlong -c bioconda filtlong
+conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
-
-
 ```
 To run filtlong
 ```
-../Filtlong/bin/filtlong passed_reads.fastq.gz --min_mean_q 7 | gzip > filtlong_output.fastq 
+filtlong --min_mean_q 10 passed_reads.fastq.gz| gzip > test.fastq.gz
 ```
 ## Flye
 ```
