@@ -8,7 +8,7 @@ To run filtlong
 ```
 filtlong --min_mean_q 9 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for nanoplot
 ```
-Setting min_mean_q to 7 ensures that reads with an average quality score below 7 will be filtered out. This helps remove reads that are more
+Setting min_mean_q to 9 ensures that reads with an average quality score below 9 will be filtered out. This helps remove reads that are more
 likely to contain sequencing errors or low-quality data, which can negatively impact downstream analyses such as genome assembly or variant
 calling.
 ## Nanoplot
