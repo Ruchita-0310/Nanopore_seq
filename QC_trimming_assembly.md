@@ -27,10 +27,9 @@ nano porechop_passed.sbatch #job script
 ####### Run your script #########################
 porechop -i passed_reads.fastq.gz -o trimmed_reads.fastq.gz -t 12
 sbatch porechop_passed.sbatch #command to run job script
-```
-Command for porechop
-```
 
+##ERORR
+Detected 1 oom-kill event(s) in StepId=23136556.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
 ```
 ## Nanoplot
 ```
@@ -53,6 +52,8 @@ sbatch nanoplot_test.sbatch #command to run job script
 ```
 conda install -c bioconda flye #in filtlong env
 flye --nano-raw test.fastq.gz --meta --genome-size 450m --out-dir assembly_flye -i 0 --threads 4
+
+
 ##ERROR 
 [2023-09-27 21:06:59] ERROR: Command '['flye-modules', 'assemble', '--reads', '/work/ebg_lab/eb/Ruchita_working/nano_data/test_qc/test.fastq.gz', '--out-asm', '/work/ebg_lab/eb/Ruchita_working/nano_data/test_qc/assembly_flye/00-assembly/draft_assembly.fasta', '--config', '/home/ruchita.solanki/.conda/envs/filtlong/lib/python3.10/site-packages/flye/config/bin_cfg/asm_raw_reads.cfg', '--log', '/work/ebg_lab/eb/Ruchita_working/nano_data/test_qc/assembly_flye/flye.log', '--threads', '4', '--meta', '--genome-size', '450000000', '--min-ovlp', '3000']' died with <Signals.SIGKILL: 9>.
 ```
