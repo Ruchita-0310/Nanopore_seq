@@ -1,10 +1,11 @@
 # Installing and running softwares on ARC using conda and pip
 ## Filtlong
+[Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
 ```
-Command for [filtlong](https://github.com/rrwick/Filtlong)
+
 ```
 filtlong --min_mean_q 9 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for nanoplot
 ```
