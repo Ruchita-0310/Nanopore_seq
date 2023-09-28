@@ -11,6 +11,15 @@ filtlong --min_mean_q 7 passed_reads.fastq.gz| gzip > test.fastq.gz #will produc
 Setting min_mean_q to 7 ensures that reads with an average quality score below 7 will be filtered out. This helps remove reads that are more
 likely to contain sequencing errors or low-quality data, which can negatively impact downstream analyses such as genome assembly or variant
 calling.
+## Porechop
+```
+conda create --name porechop -c bioconda porechop #made new env called porechop
+conda activate porechop
+```
+Command for porechop
+```
+
+```
 ## Nanoplot
 ```
 module load python/3.10.4
