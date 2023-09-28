@@ -40,7 +40,7 @@ conda install -c bioconda flye #in filtlong env
 #SBATCH --mem=15G
 #SBATCH --partition=cpu2019
 ####### Run your script #########################
-flye --nano-raw test.fastq.gz --meta --genome-size 50m --out-dir assembly_flye -i 0 --threads 8
+flye --nano-raw test_2.fastq.gz --meta --genome-size 50m --out-dir assembly_flye -i 0 --threads 8
 ```
 ## Medaka
 ```
