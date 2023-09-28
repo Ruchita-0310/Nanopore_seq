@@ -4,11 +4,9 @@
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
-filtlong --min_mean_q 9 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for nanoplot
+filtlong --min_mean_q 80 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for nanoplot
 ```
-Setting min_mean_q to 9 ensures that reads with an average quality score below 9 will be filtered out. This helps remove reads that are more
-likely to contain sequencing errors or low-quality data, which can negatively impact downstream analyses such as genome assembly or variant
-calling.
+[Mean q](https://github.com/rrwick/Filtlong#read-scoring) is set to 80 to remove the reads that were less than 80% correct
 ## 2. Nanoplot
 [NanoPlot](https://github.com/wdecoster/NanoPlot) is a good tool to visualize the data
 ```
