@@ -1,19 +1,3 @@
-# Install pod5
-```
-pip3 install pod5
-cp -r /Users/ruchitasolanki/Library/Python/3.9/lib/python/site-packages/pod5 ~/Downloads
-```
-## Convert .fast5 to .pod5 files
-```
-cd ~/Downloads/pod5/tools
-python3 -m main convert fast5 ~/Downloads/*.fast5 --output ~/Downloads/
-```
-
-Transfer .pod5 file from local machine to ARC
-```
-scp ~/Downloads/output.pod5 ruchita.solanki@arc.ucalgary.ca:/work/ebg_lab/eb/Ruchita_working
-```
-
 # Install Dorado
 ```
 tar xf ont-dorado-server_7.1.4_linux64.tar.gz
@@ -24,6 +8,21 @@ tar xf ont-dorado-server_7.1.4_linux64.tar.gz
 ont-dorado-server/bin/dorado_basecall_server --print_workflows
 ```
 FLO-MIN106     SQK-LSK109                  dna_r9.4.1_450bps_hac          invalid model file
+## Install pod5
+```
+pip3 install pod5
+cp -r /Users/ruchitasolanki/Library/Python/3.9/lib/python/site-packages/pod5 ~/Downloads
+```
+### Convert .fast5 to .pod5 files
+```
+cd ~/Downloads/pod5/tools
+python3 -m main convert fast5 ~/Downloads/*.fast5 --output ~/Downloads/
+```
+
+Transfer .pod5 file from local machine to ARC
+```
+scp ~/Downloads/output.pod5 ruchita.solanki@arc.ucalgary.ca:/work/ebg_lab/eb/Ruchita_working
+```
 
 ## Start run Dorado on ARC server
 ```
