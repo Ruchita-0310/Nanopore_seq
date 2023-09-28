@@ -15,6 +15,18 @@ calling.
 ```
 conda create --name porechop -c bioconda porechop #made new env called porechop
 conda activate porechop
+nano porechop_passed.sbatch #job script
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=1G
+#SBATCH --partition=cpu2019
+####### Run your script #########################
+porechop -i passed_reads.fastq.gz -o trimmed_reads.fastq.gz -t 12
+sbatch porechop_passed.sbatch #command to run job script
 ```
 Command for porechop
 ```
