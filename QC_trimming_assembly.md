@@ -51,7 +51,16 @@ sbatch nanoplot_test.sbatch #command to run job script
 ## Flye
 ```
 conda install -c bioconda flye #in filtlong env
-flye --nano-raw test.fastq.gz --meta --genome-size 450m --out-dir assembly_flye -i 0 --threads 4
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=48:00:00
+#SBATCH --mem=1G
+#SBATCH --partition=cpu2019
+####### Run your script #########################
+flye --nano-raw test.fastq.gz --meta --genome-size 450m --out-dir assembly_flye -i 0 --threads 30
 
 
 ##ERROR
