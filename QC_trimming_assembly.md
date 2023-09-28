@@ -6,36 +6,16 @@ conda activate filtlong
 ```
 To run filtlong
 ```
-filtlong --min_mean_q 7 passed_reads.fastq.gz| gzip > test.fastq.gz #will produce test.fastq.gz file which will be used for nanoplot
+filtlong --min_mean_q 9 passed_reads.fastq.gz| gzip > test.fastq.gz #will produce test.fastq.gz file which will be used for nanoplot
 ```
 Setting min_mean_q to 7 ensures that reads with an average quality score below 7 will be filtered out. This helps remove reads that are more
 likely to contain sequencing errors or low-quality data, which can negatively impact downstream analyses such as genome assembly or variant
 calling.
-## Porechop
-```
-conda create --name porechop -c bioconda porechop #made new env called porechop
-conda activate porechop
-nano porechop_passed.sbatch #job script
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=1G
-#SBATCH --partition=cpu2019
-####### Run your script #########################
-porechop -i passed_reads.fastq.gz -o trimmed_reads.fastq.gz -t 12
-sbatch porechop_passed.sbatch #command to run job script
-
-##ERORR
-Detected 1 oom-kill event(s) in StepId=23136556.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
-```
 ## Nanoplot
 ```
 module load python/3.10.4
 pip3 install NanoPlot
-nano nanoplot_test.sbatch #job script
+nano nanoplot_test.sbatch #creating a job script
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -56,11 +36,11 @@ conda install -c bioconda flye #in filtlong env
 #SBATCH --nodes=1
 #SBATCH --ntasks=2
 #SBATCH --cpus-per-task=4
-#SBATCH --time=48:00:00
-#SBATCH --mem=1G
+#SBATCH --time=72:00:00
+#SBATCH --mem=15G
 #SBATCH --partition=cpu2019
 ####### Run your script #########################
-flye --nano-raw test.fastq.gz --meta --genome-size 450m --out-dir assembly_flye -i 0 --threads 30
+flye --nano-raw test.fastq.gz --meta --genome-size 50m --out-dir assembly_flye -i 0 --threads 8
 
 
 ##ERROR
