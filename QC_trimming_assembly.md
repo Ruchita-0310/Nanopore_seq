@@ -1,18 +1,15 @@
 # Installing and running softwares on ARC using conda and pip
-## Filtlong
+## 1. Filtlong
 [Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
-```
-
-```
 filtlong --min_mean_q 9 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for nanoplot
 ```
 Setting min_mean_q to 9 ensures that reads with an average quality score below 9 will be filtered out. This helps remove reads that are more
 likely to contain sequencing errors or low-quality data, which can negatively impact downstream analyses such as genome assembly or variant
 calling.
-## Nanoplot
+## 2. Nanoplot
 [NanoPlot](https://github.com/wdecoster/NanoPlot) is a good tool to visualize the data
 ```
 module load python/3.10.4
@@ -30,7 +27,7 @@ nano nanoplot_test.sbatch #creating a job script
 NanoPlot -t 8 --fastq test_2.fastq.gz --maxlength 4000000 --plots dot --legacy hex
 sbatch nanoplot_test.sbatch #command to run job script
 ```
-## Flye
+## 3. Flye
 [Flye](https://github.com/fenderglass/Flye) is an assembler 
 ```
 conda install -c bioconda flye #in filtlong env
@@ -45,7 +42,7 @@ conda install -c bioconda flye #in filtlong env
 ####### Run your script #########################
 flye --nano-raw test_2.fastq.gz --meta --genome-size 50m --out-dir assembly_flye -i 0 --threads 8
 ```
-## Medaka
+## 4. Medaka
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 ```
 pip install medaka #in filtlong env
