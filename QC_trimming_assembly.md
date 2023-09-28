@@ -4,7 +4,7 @@
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
-filtlong --min_mean_q 80 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for nanoplot
+filtlong --min_mean_q 80 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for downstream analysis
 ```
 [Mean q](https://github.com/rrwick/Filtlong#read-scoring) is set to 80 to remove the reads that were less than 80% correct
 ## 2. Nanoplot
