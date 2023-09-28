@@ -22,7 +22,8 @@ nano nanoplot_test.sbatch #job script
 #SBATCH --mem=1G
 #SBATCH --partition=cpu2019
 ####### Run your script #########################
-NanoPlot -t 8 --fastq test.fastq.gz --maxlength 4000000 --plots dot --legacy hex 
+NanoPlot -t 8 --fastq test.fastq.gz --maxlength 4000000 --plots dot --legacy hex
+sbatch nanoplot_test.sbatch #command to run job script
 ```
 ## Flye
 ```
