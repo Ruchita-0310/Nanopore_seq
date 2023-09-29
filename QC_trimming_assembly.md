@@ -7,7 +7,8 @@ conda activate filtlong
 filtlong --min_mean_q 80 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will produce test_2.fastq.gz file which will be used for downstream analysis
 ```
 [Mean q](https://github.com/rrwick/Filtlong#read-scoring) is set to 80 to remove the reads that were less than 80% correct which was already done by guppy. So you can play around with different mean_q values to get a better assembly. 
-I used 80% and 95% and will compared it using flye.
+I used 80% and 95% and will compared it using flye. 
+95% is too high to get circular genomes. So keep mean q to 80%. 
 ## 2. Nanoplot
 [NanoPlot](https://github.com/wdecoster/NanoPlot) is a good tool to visualize the data
 ```
@@ -35,11 +36,11 @@ conda install -c bioconda flye #in filtlong env
 #SBATCH --nodes=1
 #SBATCH --ntasks=2
 #SBATCH --cpus-per-task=4
-#SBATCH --time=72:00:00
+#SBATCH --time=24:00:00
 #SBATCH --mem=15G
-#SBATCH --partition=cpu2019
+#SBATCH --partition=bigmem
 ####### Run your script #########################
-flye --nano-raw test_2.fastq.gz --meta --genome-size 50m --out-dir assembly_flye -i 0 --threads 8
+flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 ```
 ## 4. Medaka
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
