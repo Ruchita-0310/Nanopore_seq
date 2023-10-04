@@ -29,7 +29,7 @@ You could use job scheduler like SLURM.
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
-filtlong --min_mean_q 80 passed_reads_trimmed.fastq.gz| gzip > chopped_reads.fastq.gz #will produce chopped_reads.fastq.gz file which will be used for downstream analysis
+filtlong --min_mean_q 80 passed_reads_trimmed.fastq.gz| gzip > final_reads.fastq.gz #will produce final_reads.fastq.gz file which will be used for downstream analysis
 ```
 [Mean q](https://github.com/rrwick/Filtlong#read-scoring) is set to 80 to remove the reads that were less than 80% correct which was already done by guppy. So you can play around with different mean_q values to get a better assembly. 
 I used 80% and 95% and will compared it using flye. 
@@ -49,7 +49,7 @@ nano nanoplot_test.sbatch #creating a job script
 #SBATCH --mem=1G
 #SBATCH --partition=cpu2019
 ####### Run your script #########################
-NanoPlot -t 8 --fastq chopped_reads.fastq.gz --maxlength 4000000 --plots dot --legacy hex
+NanoPlot -t 8 --fastq final_reads.fastq.gz --maxlength 4000000 --plots dot --legacy hex
 sbatch nanoplot_test.sbatch #command to run job script
 ```
 # Assembly
@@ -72,7 +72,8 @@ sbatch flye
 ```
 ## 2. Canu
 [Canu](https://github.com/marbl/canu/releases) is an older assembly PIPELINE but still works very well. 
-All reads are assumed to be raw and untrimmed because it does the trimming and correction (https://canu.readthedocs.io/en/latest/tutorial.html)
+All reads are assumed to be raw and untrimmed because it does the trimming and correction
+(https://canu.readthedocs.io/en/latest/tutorial.html)
 ```
 curl -L https://github.com/marbl/canu/releases/download/v2.2/canu-2.2.Linux-amd64.tar.xz --output canu-2.2.Linux.tar.xz 
 tar -xJf canu-2.2.Linux.tar.xz
@@ -88,14 +89,17 @@ tar -xJf canu-2.2.Linux.tar.xz
 canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanopore passed_reads.fastq.gz
 ```
 ## 3. Raven
-
+[Raven](https://github.com/lbcb-sci/raven) is a de novo genome assembler for long uncorrected reads.
+```
+conda install -c bioconda raven-assembler
+raven -t 30 -p 4 final_reads.fastq.gz
+```
 ## 4. Trycycler
 # Polishing
 ## 1. Minimap2
 minimap2 is a mapping software used along side with racon
 ## 2. Racon
-
-Used 3 time
+Use it 3 times
 ## 3. Medaka 
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 Use it 2 times
