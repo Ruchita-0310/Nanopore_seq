@@ -46,4 +46,15 @@ flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 ```
 pip install medaka #in filtlong env
+conda activate filtlong
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+medaka_consensus -i iassembly.fasta -d test_2.fasta.gz -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
 ```
