@@ -1,5 +1,24 @@
-# Installing and running softwares on ARC using conda and pip
-## 1. Filtlong
+Installing and running softwares on ARC using conda and pip
+# Quality control
+## 1. Porechop
+[Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use it. 
+```
+conda create -n porechop
+conda activate porechop
+conda install -c bioconda porechop
+#to run porechop
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+porechop -i all_passed_reads.fastq.gz -o all_passed_reads_trimmed.fastq.gz -t 12
+```
+## 2. Filtlong
 [Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
@@ -9,7 +28,7 @@ filtlong --min_mean_q 80 passed_reads.fastq.gz| gzip > test_2.fastq.gz #will pro
 [Mean q](https://github.com/rrwick/Filtlong#read-scoring) is set to 80 to remove the reads that were less than 80% correct which was already done by guppy. So you can play around with different mean_q values to get a better assembly. 
 I used 80% and 95% and will compared it using flye. 
 95% is too high to get circular genomes. So keep mean q to 80%. 
-## 2. Nanoplot
+## 3. Nanoplot
 [NanoPlot](https://github.com/wdecoster/NanoPlot) is a good tool to visualize the data
 ```
 module load python/3.10.4
@@ -27,7 +46,8 @@ nano nanoplot_test.sbatch #creating a job script
 NanoPlot -t 8 --fastq test_2.fastq.gz --maxlength 4000000 --plots dot --legacy hex
 sbatch nanoplot_test.sbatch #command to run job script
 ```
-## 3. Flye
+# Assembly
+# 1. Flye
 [Flye](https://github.com/fenderglass/Flye) is an assembler 
 ```
 conda install -c bioconda flye #in filtlong env
@@ -42,8 +62,8 @@ conda install -c bioconda flye #in filtlong env
 ####### Run your script #########################
 flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 ```
-## minimap2 
-## racon three times
+## 2. minimap2 
+## 3. racon three times
 ## 4. Medaka two times
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 ```
@@ -60,6 +80,10 @@ conda activate filtlong
 ####### Run your script #########################
 medaka_consensus -i iassembly.fasta -d test_2.fasta.gz -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
 ```
+## 5. Trycycler
+## 6. Bandage
+
 # Bining 
-## metabatz
-## 
+## 1. MetaBAT2
+## 2. MaxBin2
+## 3. Vamb
