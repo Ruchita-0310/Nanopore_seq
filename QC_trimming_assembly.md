@@ -1,7 +1,7 @@
-Installing and running softwares on ARC using conda and pip
 # Quality control
 ## 1. Porechop
-[Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use it. 
+[Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use
+it. 
 ```
 conda create -n porechop
 conda activate porechop
@@ -16,7 +16,7 @@ conda install -c bioconda porechop
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-porechop -i all_passed_reads.fastq.gz -o all_passed_reads_trimmed.fastq.gz -t 12
+porechop -i passed_reads.fastq.gz -o passed_reads_trimmed.fastq.gz -t 12
 ```
 ## 2. Filtlong
 [Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads
@@ -47,8 +47,8 @@ NanoPlot -t 8 --fastq test_2.fastq.gz --maxlength 4000000 --plots dot --legacy h
 sbatch nanoplot_test.sbatch #command to run job script
 ```
 # Assembly
-# 1. Flye
-[Flye](https://github.com/fenderglass/Flye) is an assembler 
+## 1. Flye
+[Flye](https://github.com/fenderglass/Flye) is an assembler. Especially good for metagenomic analysis
 ```
 conda install -c bioconda flye #in filtlong env
 #!/bin/bash
@@ -62,9 +62,15 @@ conda install -c bioconda flye #in filtlong env
 ####### Run your script #########################
 flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 ```
-## 2. minimap2 
-## 3. racon three times
-## 4. Medaka two times
+## 2. Canu
+## 3. Raven
+## 4. Trycycler
+# Polishing
+## 1. Minimap2
+## 2. Racon
+used 3 time
+## 3. Medaka 
+used 2 times
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 ```
 pip install medaka #in filtlong env
@@ -80,9 +86,6 @@ conda activate filtlong
 ####### Run your script #########################
 medaka_consensus -i iassembly.fasta -d test_2.fasta.gz -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
 ```
-## 5. Trycycler
-## 6. Bandage
-
 # Bining 
 ## 1. MetaBAT2
 ## 2. MaxBin2
