@@ -3,6 +3,9 @@ Before doing any quality control, concatenate all the passed reads into one file
 ```
 cat ./fastq_pass/*.fastq.gz > passed_reads.fastq.gz
 ```
+```
+squeue -u ruchita.solanki #command to see what is running
+```
 ## 1. Porechop
 [Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use
 it. 
@@ -67,7 +70,7 @@ conda activate filtlong
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-flye --nano-raw chopped_reads.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
+flye --nano-raw final_reads.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 sbatch flye
 ```
 ## 2. Canu
@@ -91,7 +94,18 @@ canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanop
 ## 3. Raven
 [Raven](https://github.com/lbcb-sci/raven) is a de novo genome assembler for long uncorrected reads.
 ```
+conda -n raven #created new env 
+conda activate raven
 conda install -c bioconda raven-assembler
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+####### Run your script #########################
 raven -t 30 -p 4 final_reads.fastq.gz
 ```
 ## 4. Trycycler
