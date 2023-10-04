@@ -74,7 +74,16 @@ sbatch flye
 ```
 curl -L https://github.com/marbl/canu/releases/download/v2.2/canu-2.2.Linux-amd64.tar.xz --output canu-2.2.Linux.tar.xz 
 tar -xJf canu-2.2.Linux.tar.xz
-
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanopore passed_reads.fastq.gz
 ```
 ## 3. Raven
 ## 4. Trycycler
