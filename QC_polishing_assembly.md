@@ -52,6 +52,7 @@ sbatch nanoplot_test.sbatch #command to run job script
 [Flye](https://github.com/fenderglass/Flye) is an assembler. Especially good for metagenomic analysis.
 ```
 conda install -c bioconda flye #in filtlong env
+conda activate filtlong
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
