@@ -42,7 +42,9 @@ conda install -c bioconda flye #in filtlong env
 ####### Run your script #########################
 flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 ```
-## 4. Medaka
+## minimap2 
+## racon three times
+## 4. Medaka two times
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 ```
 pip install medaka #in filtlong env
@@ -58,3 +60,6 @@ conda activate filtlong
 ####### Run your script #########################
 medaka_consensus -i iassembly.fasta -d test_2.fasta.gz -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
 ```
+# Bining 
+## metabatz
+## 
