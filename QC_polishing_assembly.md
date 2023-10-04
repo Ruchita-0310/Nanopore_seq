@@ -3,10 +3,9 @@
 [Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use
 it. 
 ```
-conda create -n porechop
+conda create -n porechop #created new env
 conda activate porechop
 conda install -c bioconda porechop
-#to run porechop
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -17,6 +16,7 @@ conda install -c bioconda porechop
 #SBATCH --partition=bigmem
 ####### Run your script #########################
 porechop -i passed_reads.fastq.gz -o passed_reads_trimmed.fastq.gz -t 12
+sbatch porechop
 ```
 ## 2. Filtlong
 [Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads
@@ -61,6 +61,7 @@ conda install -c bioconda flye #in filtlong env
 #SBATCH --partition=bigmem
 ####### Run your script #########################
 flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
+sbatch flye
 ```
 ## 2. Canu
 ## 3. Raven
@@ -85,6 +86,7 @@ conda activate filtlong
 #SBATCH --partition=bigmem
 ####### Run your script #########################
 medaka_consensus -i iassembly.fasta -d test_2.fasta.gz -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
+sbatch medaka
 ```
 # Bining 
 ## 1. MetaBAT2
