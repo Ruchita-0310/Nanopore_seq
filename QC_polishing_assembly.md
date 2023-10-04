@@ -42,7 +42,7 @@ I used 80% and 95% and will compared it using flye.
 ```
 module load python/3.10.4
 pip3 install NanoPlot
-nano nanoplot_test.sbatch #creating a job script
+nano nanoplot #creating a job script
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -61,6 +61,7 @@ sbatch nanoplot_test.sbatch #command to run job script
 ```
 conda install -c bioconda flye #in filtlong env
 conda activate filtlong
+nano flye #creating a job script
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -80,6 +81,7 @@ All reads are assumed to be raw and untrimmed because it does the trimming and c
 ```
 curl -L https://github.com/marbl/canu/releases/download/v2.2/canu-2.2.Linux-amd64.tar.xz --output canu-2.2.Linux.tar.xz 
 tar -xJf canu-2.2.Linux.tar.xz
+nano canu #creating a job script
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -97,6 +99,7 @@ canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanop
 conda -n raven #created new env 
 conda activate raven
 conda install -c bioconda raven-assembler
+nano raven #creating a job script
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -120,6 +123,7 @@ Use it 2 times
 ```
 pip install medaka #in filtlong env
 conda activate filtlong
+nano medaka #creating a job script
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
