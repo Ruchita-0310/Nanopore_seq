@@ -19,8 +19,8 @@ porechop -i passed_reads.fastq.gz -o passed_reads_trimmed.fastq.gz -t 12
 sbatch porechop
 ```
 ## 2. Filtlong
-[Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads
-You could use job scheduler like SLURM
+[Filtlong](https://github.com/rrwick/Filtlong) a tool for filtering long reads. 
+You could use job scheduler like SLURM. 
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
@@ -49,7 +49,7 @@ sbatch nanoplot_test.sbatch #command to run job script
 ```
 # Assembly
 ## 1. Flye
-[Flye](https://github.com/fenderglass/Flye) is an assembler. Especially good for metagenomic analysis
+[Flye](https://github.com/fenderglass/Flye) is an assembler. Especially good for metagenomic analysis.
 ```
 conda install -c bioconda flye #in filtlong env
 #!/bin/bash
