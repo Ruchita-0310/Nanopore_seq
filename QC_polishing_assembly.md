@@ -1,7 +1,12 @@
 # Quality control
+Before doing any quality control, concatenate all the passed reads into one file 
+```
+cat ./fastq_pass/*.fastq.gz > passed_reads.fastq.gz
+```
 ## 1. Porechop
 [Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use
 it. 
+Guppy basecaller does the adapter trimming. Still better to use porechop. 
 ```
 conda create -n porechop #created new env
 conda activate porechop
@@ -62,10 +67,15 @@ conda activate filtlong
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-flye --nano-raw test_2.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
+flye --nano-raw chopped_reads.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 sbatch flye
 ```
 ## 2. Canu
+```
+curl -L https://github.com/marbl/canu/releases/download/v2.2/canu-2.2.Linux-amd64.tar.xz --output canu-2.2.Linux.tar.xz 
+tar -xJf canu-2.2.Linux.tar.xz
+
+```
 ## 3. Raven
 ## 4. Trycycler
 # Polishing
