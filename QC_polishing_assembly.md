@@ -71,6 +71,8 @@ flye --nano-raw chopped_reads.fastq.gz --meta --genome-size 15m --out-dir assemb
 sbatch flye
 ```
 ## 2. Canu
+[Canu](https://github.com/marbl/canu/releases) is an older assembly PIPELINE but still works very well. 
+All reads are assumed to be raw and untrimmed because it does the trimming and correction (https://canu.readthedocs.io/en/latest/tutorial.html)
 ```
 curl -L https://github.com/marbl/canu/releases/download/v2.2/canu-2.2.Linux-amd64.tar.xz --output canu-2.2.Linux.tar.xz 
 tar -xJf canu-2.2.Linux.tar.xz
@@ -86,6 +88,7 @@ tar -xJf canu-2.2.Linux.tar.xz
 canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanopore passed_reads.fastq.gz
 ```
 ## 3. Raven
+
 ## 4. Trycycler
 # Polishing
 ## 1. Minimap2
