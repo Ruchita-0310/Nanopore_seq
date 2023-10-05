@@ -114,7 +114,7 @@ raven -t 30 -p 4 final_reads.fastq.gz
 ## 4. Trycycler
 [Trycycler](https://github.com/rrwick/Trycycler/wiki) is a multiple sequence aligner. It clusters the contif sequences, reconcile the alternative contig sequences, performs MSA, and constructs a consensus sequence from MSA. 
 ```
-conda -n trycyler
+conda create -n trycyler
 conda activate trycycler
 conda install trycycler
 
