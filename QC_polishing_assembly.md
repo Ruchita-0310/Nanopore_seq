@@ -120,10 +120,21 @@ conda install trycycler
 
 ```
 # Polishing
-## 1. Minimap2
-minimap2 is a mapping software used along side with racon
+## 1. Minimap2 + Miniasm
+Minimap2 is a mapping software used along side with racon
+```
+conda create -n minisuite
+conda activate minisuite
+conda install -c bioconda minimap2
+conda install -c bioconda miniasm
+```
 ## 2. Racon
 Use it 3 times
+```
+conda create -n racon
+conda activate racon
+conda install -c bioconda racon
+```
 ## 3. Medaka 
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 Use it 2 times
