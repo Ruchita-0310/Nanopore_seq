@@ -118,6 +118,11 @@ conda create -n trycyler
 conda activate trycycler
 conda install trycycler
 
+#to cluster the assemblies
+trycycler cluster --assemblies *.fasta --reads final_reads.fastq.gz --out_dir trycycler_out
+
+#to reconcile the clusters
+trycycler reconcile --reads final_reads.fastq --cluster_dir trycycler_out/cluster_001
 ```
 # Polishing
 ## 1. Minimap2 + Miniasm
