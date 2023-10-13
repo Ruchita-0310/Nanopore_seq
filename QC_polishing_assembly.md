@@ -122,7 +122,10 @@ conda install trycycler
 trycycler cluster --assemblies *.fasta --reads final_reads.fastq.gz --out_dir trycycler_out
 
 #to reconcile the clusters
-trycycler reconcile --reads final_reads.fastq --cluster_dir trycycler_out/cluster_001
+#make sure to remove all the clusters that have 1 contigs in them
+#to print all the good clusters (ie having more than 1 contig in them)
+for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ $i -gt 1 ]; then echo $directory; fi; done
+trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
 ```
 # Polishing
 ## 1. Minimap2 + Miniasm
