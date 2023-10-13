@@ -123,7 +123,8 @@ trycycler cluster --assemblies *.fasta --reads final_reads.fastq.gz --out_dir tr
 
 #to reconcile the clusters
 #make sure to remove all the clusters that have 1 contigs in them
-#to print all the good clusters (ie having more than 1 contig in them)
+#to print all the good clusters (ie having more than 1 contig in them). You  should have more than 1 cluster that have multiple contigs
+#copy all the good clusters to a new directory and run reconcile as a sbatch script. 
 for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ $i -gt 1 ]; then echo $directory; fi; done
 trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
 ```
