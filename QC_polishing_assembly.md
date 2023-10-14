@@ -74,6 +74,12 @@ nano flye #creating a job script
 flye --nano-raw final_reads.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 sbatch flye
 ```
+To have a subset of sequences to run checkm2/gtdb-tk on.
+```
+conda install -c bioconda seqtk
+nano seqtk_names
+seqtk subseq assembly.fasta seqtk_names > out.fq
+```
 ## 2. Canu
 [Canu](https://github.com/marbl/canu/releases) is an older assembly PIPELINE but still works very well. 
 All reads are assumed to be raw and untrimmed because it does the trimming and correction
