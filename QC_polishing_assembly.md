@@ -74,7 +74,7 @@ nano flye #creating a job script
 flye --nano-raw final_reads.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 sbatch flye
 ```
-To have a subset of sequences to run checkm2/gtdb-tk on.
+[Seqtk](https://github.com/lh3/seqtk) is a tool kit that helps you create a subset of sequences to run checkm2/gtdb-tk on.
 ```
 conda install -c bioconda seqtk
 nano seqtk_names
