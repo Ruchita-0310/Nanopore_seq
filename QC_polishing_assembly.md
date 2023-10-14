@@ -75,6 +75,7 @@ flye --nano-raw final_reads.fastq.gz --meta --genome-size 15m --out-dir assembly
 sbatch flye
 ```
 [Seqtk](https://github.com/lh3/seqtk) is a tool kit that helps you create a subset of sequences to run checkm2/gtdb-tk on.
+While trycycler is running, you could download [Bandage](https://github.com/rrwick/Bandage) to visualize the contigs produced by Flye. Some contigs will be circular and you could run checkm and gtdb-tk. 
 ```
 conda install -c bioconda seqtk
 nano seqtk_names
