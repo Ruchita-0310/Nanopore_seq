@@ -136,8 +136,8 @@ for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ 
 trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
 ```
 # Polishing
-## 1. Minimap2 + Miniasm
-Minimap2 is a mapping software used along side with racon
+## 1. Minimap2 
+Minimap2 is a mapping software used along side with racon 3 times
 ```
 conda create -n minisuite
 conda activate minisuite
@@ -151,7 +151,12 @@ conda install -c bioconda miniasm
 #SBATCH --time=24:00:00
 #SBATCH --mem=100G
 #SBATCH --partition=bigmem
+###mapping -1
 minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/minimap2.sam
+###mapping -2
+minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/2minimap2.sam
+###mapping -3
+minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/3minimap2.sam
 ```
 ## 2. Racon
 Use it 3 times
@@ -159,7 +164,20 @@ Use it 3 times
 conda create -n racon
 conda activate racon
 conda install -c bioconda racon
-
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+###polishing -1 
+racon -t 14 assembly.fasta minimap2.sam final_reads.fastq.gz > racon1.fasta
+###polishing -2
+racon -t 14 assembly.fasta 2minimap2.sam racon1.fasta > racon2.fasta
+###polishing -3
+racon -t 14 assembly.fasta 3minimap2.sam racon2.fasta > racon3.fasta
 ```
 ## 3. Medaka 
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
