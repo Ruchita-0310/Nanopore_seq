@@ -143,6 +143,15 @@ conda create -n minisuite
 conda activate minisuite
 conda install -c bioconda minimap2
 conda install -c bioconda miniasm
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/minimap2.sam
 ```
 ## 2. Racon
 Use it 3 times
@@ -150,6 +159,7 @@ Use it 3 times
 conda create -n racon
 conda activate racon
 conda install -c bioconda racon
+
 ```
 ## 3. Medaka 
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
