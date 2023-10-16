@@ -145,7 +145,6 @@ reference database.
 conda create -n minisuite
 conda activate minisuite
 conda install -c bioconda minimap2
-conda install -c bioconda miniasm
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -189,9 +188,9 @@ Use it 2 times
 ```
 conda create -n medaka
 conda activate medaka
-pip3 install medaka
-module load bioconda/2018.11 #in medaka env
-conda install -c bioconda minimap2=2.17 #in medaka env
+conda install python=3.7 minimap2=2.17 
+pip install medaka
+module load biobuilds/2017.11 #in medaka env because it has samtools, bgzip and tabix. 
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
