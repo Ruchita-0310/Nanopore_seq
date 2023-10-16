@@ -152,11 +152,11 @@ conda install -c bioconda miniasm
 #SBATCH --mem=100G
 #SBATCH --partition=bigmem
 ###mapping -1
-minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/minimap2.sam
+minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/minimap2.sam
 ###mapping -2
-minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/2minimap2.sam
+minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/2minimap2.sam
 ###mapping -3
-minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz  > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/3minimap2.sam
+minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/3minimap2.sam
 ```
 ## 2. Racon
 Use it 3 times
