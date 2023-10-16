@@ -189,7 +189,9 @@ Use it 2 times
 ```
 conda create -n medaka
 conda activate medaka
-conda install -c bioconda python=3.9 samtools=1.14 bgzip=1.14 tabix=1.14 minimap2=2.17
+pip3 install medaka
+module load bioconda/2018.11 #in medaka env
+conda install -c bioconda minimap2=2.17 #in medaka env
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
