@@ -187,9 +187,9 @@ racon -t 14 assembly.fasta 3minimap2.sam racon2.fasta > racon3.fasta
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 Use it 2 times
 ```
-pip install medaka #in filtlong env
-conda activate filtlong
-nano medaka #creating a job script
+conda create -n medaka
+conda activate medaka
+conda install -c bioconda python=3.9 samtools=1.14 bgzip=1.14 tabix=1.14 minimap2=2.17
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -199,7 +199,7 @@ nano medaka #creating a job script
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-medaka_consensus -i iassembly.fasta -d test_2.fasta.gz -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
+medaka_consensus -i final_reads.fastq.gz -d racon3.fast -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
 sbatch medaka
 ```
 # Bining 
