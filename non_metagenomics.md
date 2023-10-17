@@ -55,7 +55,7 @@ trycycler cluster --assemblies *.fasta --reads final_reads.fastq.gz --out_dir tr
 for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ $i -gt 1 ]; then echo $directory; fi; done
 trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
 ```
-# Polishing
+# Binning
 ## 1. Vamb
 [Vamb](https://github.com/RasmussenLab/vamb)
 ```
