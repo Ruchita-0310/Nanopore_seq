@@ -4,7 +4,8 @@ Before doing any quality control, concatenate all the passed reads into one file
 cat ./fastq_pass/*.fastq.gz > passed_reads.fastq.gz
 ```
 ```
-squeue -u ruchita.solanki #command to see what is running
+squeue -u ruchita.solanki
+watch squeue -u ruchita.solanki #command to see what is running
 ```
 ## 1. Porechop
 [Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use
@@ -32,7 +33,8 @@ You could use job scheduler like SLURM.
 ```
 conda create --name filtlong -c bioconda filtlong #made new env called filtlong
 conda activate filtlong
-filtlong --min_mean_q 80 passed_reads_trimmed.fastq.gz| gzip > final_reads.fastq.gz #will produce final_reads.fastq.gz file which will be used for downstream analysis
+filtlong --min_mean_q 80 passed_reads_trimmed.fastq.gz| gzip > final_reads.fastq.gz
+#will produce final_reads.fastq.gz file which will be used for downstream analysis
 ```
 [Mean q](https://github.com/rrwick/Filtlong#read-scoring) is set to 80 to remove the reads that were less than 80% correct which was already done by guppy. So you can play around with different mean_q values to get a better assembly. 
 I used 80% and 95% and will compared it using flye. 
@@ -228,6 +230,8 @@ mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome 
 ## 4. CONCOCT
 [CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html)
 ```
+conda activate metawrap-env
+conda install samtools==1.11 ##upgrade samtools!!
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -237,7 +241,6 @@ mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome 
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-conda activate metawrap-env
 cut_up_fasta.py racon3.fasta -c 10000 -o 0 --merge_last -b contigs_10K.bed > contigs_10K.fa
 concoct_coverage_table.py contigs_10K.bed sorted.bam > coverage_table.tsv
 
