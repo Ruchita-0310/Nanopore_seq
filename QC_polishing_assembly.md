@@ -226,6 +226,7 @@ cd ../
 mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
 ```
 ## 4. CONCOCT
+[CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html)
 ```
 #!/bin/bash
 ####### Reserve computing resources #############
