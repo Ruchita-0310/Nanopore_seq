@@ -230,5 +230,5 @@ perl run_MaxBin.pl -h
 [Vamb](https://github.com/RasmussenLab/vamb)
 ```
 pip install vamb
-vamb --outdir  --fasta /path/to/catalogue.fna.gz --bamfiles /path/to/bam/*.bam -o C–minfasta 500000
+vamb --outdir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/vamb --fasta /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/racon3.fasta --bamfiles /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/sorted.bam -–minfasta 500000
 ```
