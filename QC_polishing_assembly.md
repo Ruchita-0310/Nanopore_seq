@@ -236,6 +236,7 @@ mkdir build && cd build && cmake /your/path/build
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
+conda activate metawrap-env
 metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 ```
 - Produced 38 .fa files
@@ -259,6 +260,7 @@ run_MaxBin.pl -h
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
+conda activate metawrap-env
 run_MaxBin.pl -contig racon3.fasta -out wrap/maxbin_out 
 ```
 - Produced 15 .fasta files and 1 .tar.gz file
@@ -290,5 +292,19 @@ tar -xvf *.tar.gz
 rm *.gz
 cd ../
 mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
+```
+## 5. CONCOCT
+```
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+cut_up_fasta.py racon3.fasta -c 10000 -o 0 --merge_last -b contigs_10K.bed > contigs_10K.fa
+concoct_coverage_table.py contigs_10K.bed sorted.bam > coverage_table.tsv
 
 ```
