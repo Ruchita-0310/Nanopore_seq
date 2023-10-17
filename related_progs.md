@@ -10,15 +10,9 @@ gtdbtk classify_wf --genome_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passe
 ```
 # Installing samtools
 ```
-wget https://github.com/samtools/samtools/releases/download/1.18/samtools-1.18.tar.bz2
-tar -xvf samtools-1.18.tar.bz2
-cd samtools-1.18/
-./configure
-
-
 conda create -n samtools-env
 conda activate samtools-env
 conda install -c bioconda samtools
-samtools view -Sb 3minimap2.sam -o 3minimap2.bam
+samtools view -Sb 3minimap3.sam -o 3minimap2.bam
 samtools sort -o sorted.bam 3minimap2.bam
 ```
