@@ -81,61 +81,6 @@ conda install -c bioconda seqtk
 nano seqtk_names
 seqtk subseq assembly.fasta seqtk_names > out.fq
 ```
-## 2. Canu - not the best for metagenomics
-[Canu](https://github.com/marbl/canu/releases) is an older assembly PIPELINE but still works very well. 
-All reads are assumed to be raw and untrimmed because it does the trimming and correction
-(https://canu.readthedocs.io/en/latest/tutorial.html)
-```
-curl -L https://github.com/marbl/canu/releases/download/v2.2/canu-2.2.Linux-amd64.tar.xz --output canu-2.2.Linux.tar.xz 
-tar -xJf canu-2.2.Linux.tar.xz
-nano canu #creating a job script
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=15G
-#SBATCH --partition=bigmem
-####### Run your script #########################
-canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanopore passed_reads.fastq.gz
-```
-## 3. Raven - not the best for metagenomics
-[Raven](https://github.com/lbcb-sci/raven) is a de novo genome assembler for long uncorrected reads.
-```
-conda -n raven #created new env 
-conda activate raven
-conda install -c bioconda raven-assembler
-nano raven #creating a job script
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=100G
-#SBATCH --partition=bigmem
-####### Run your script #########################
-raven -t 30 -p 4 final_reads.fastq.gz
-```
-## 4. Trycycler - not the best for metagenomics
-[Trycycler](https://github.com/rrwick/Trycycler/wiki) is a multiple sequence aligner. 
-- It clusters the contif sequences, reconcile the alternative contig sequences, performs MSA, and constructs a consensus sequence from MSA. 
-```
-conda create -n trycyler
-conda activate trycycler
-conda install trycycler
-
-#to cluster the assemblies
-trycycler cluster --assemblies *.fasta --reads final_reads.fastq.gz --out_dir trycycler_out
-
-#to reconcile the clusters
-#make sure to remove all the clusters that have 1 contigs in them
-#to print all the good clusters (ie having more than 1 contig in them). You  should have more than 1 cluster that have multiple contigs
-#copy all the good clusters to a new directory and run reconcile as a sbatch script. 
-for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ $i -gt 1 ]; then echo $directory; fi; done
-trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
-```
 # Polishing
 ## 1. Minimap2 
 [Minimap2](https://github.com/lh3/minimap2) is a versatile sequence alignment program that aligns DNA or mRNA sequences against a large
@@ -264,22 +209,7 @@ conda activate metawrap-env
 run_MaxBin.pl -contig racon3.fasta -out wrap/maxbin_out 
 ```
 - Produced 15 .fasta files and 1 .tar.gz file
-## 3. Vamb
-[Vamb](https://github.com/RasmussenLab/vamb)
-```
-pip install vamb
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=15G
-#SBATCH --partition=bigmem
-####### Run your script #########################
-vamb --outdir out vamb/ --fasta racon3.fasta --bamfiles sorted.bam -o C 
-```
-## 4. MetaWRAP
+## 3. MetaWRAP
 - You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the above mentioned installation method. 
 ```
 mamba create -y -n metawrap-env python=2.7
@@ -293,7 +223,7 @@ rm *.gz
 cd ../
 mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
 ```
-## 5. CONCOCT
+## 4. CONCOCT
 ```
 #!/bin/bash
 ####### Reserve computing resources #############
