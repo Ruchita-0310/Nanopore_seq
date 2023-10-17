@@ -1,14 +1,14 @@
-# Installing GTDB-TK
+# GTDB-TK
 ```
 conda create -n gtdbtk-2.3.2 -c conda-forge -c bioconda gtdbtk=2.3.2
 download-db.sh
 gtdbtk classify_wf --genome_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/trycycler/gtdbtk --out_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/trycycler/g_out --extension gz --cpus 2
 ```
-# Installing CheckM2
+# CheckM2
 ```
 
 ```
-# Installing samtools
+# Samtools
 ```
 conda create -n samtools-env
 conda activate samtools-env
