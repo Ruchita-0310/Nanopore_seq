@@ -8,3 +8,11 @@ gtdbtk classify_wf --genome_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passe
 ```
 
 ```
+# Installing samtools
+```
+wget https://github.com/samtools/samtools/releases/download/1.18/samtools-1.18.tar.bz2
+tar -xvf samtools-1.18.tar.bz2
+cd samtools-1.18/
+./configure
+
+```
