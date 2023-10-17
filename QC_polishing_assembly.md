@@ -304,6 +304,7 @@ mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome 
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
+conda activate metawrap-env
 cut_up_fasta.py racon3.fasta -c 10000 -o 0 --merge_last -b contigs_10K.bed > contigs_10K.fa
 concoct_coverage_table.py contigs_10K.bed sorted.bam > coverage_table.tsv
 
