@@ -19,6 +19,6 @@ cd samtools-1.18/
 conda create -n samtools-env
 conda activate samtools-env
 conda install -c bioconda samtools
-samtools view -bS 3minimap2.sam -o 3minimap2.bam
-samtools sort -o sorted.bam -T temp_prefix /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/3minimap2.bam
+samtools view -Sb 3minimap2.sam -o 3minimap2.bam
+samtools sort -o sorted.bam 3minimap2.bam
 ```
