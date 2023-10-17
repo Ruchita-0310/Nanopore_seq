@@ -205,5 +205,19 @@ sbatch medaka
 ```
 # Bining 
 ## 1. MetaBAT2
+[MetaBAT2](https://bitbucket.org/berkeleylab/metabat/src/master/)
+```
+wget https://bitbucket.org/berkeleylab/metabat/get/master.tar.gz
+tar xzvf master.tar.gz
+cd berkeleylab-metabat-*
+mkdir build && cd build && cmake /home/ruchita.solanki/berkeleylab-metabat-1087553d61dc/build
+CMake Error: The source directory "/home/ruchita.solanki/berkeleylab-metabat-1087553d61dc/build" does not appear to contain CMakeLists.txt.
+```
 ## 2. MaxBin2
+[MaxBin2](https://sourceforge.net/projects/maxbin2/)
+- copy it on arc
+```
+
+
+```
 ## 3. Vamb
