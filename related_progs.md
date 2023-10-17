@@ -15,4 +15,8 @@ tar -xvf samtools-1.18.tar.bz2
 cd samtools-1.18/
 ./configure
 
+
+conda create -n samtools-env
+conda activate samtools-env
+conda install -c bioconda samtools
 ```
