@@ -193,9 +193,7 @@ python --version #Python 3.7.16
 pip install medaka
 pip install numpy==1.21.6
 pip install tensorflow==2.10.0    
-conda install -c anaconda openssl
-
-conda install -c bioconda bcftools=1.11
+conda install -c bioconda bcftools=1.15.1
 conda install -c bioconda bgzip     
 conda install -c bioconda minimap2 
 conda install -c bioconda samtools  
