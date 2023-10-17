@@ -119,7 +119,8 @@ nano raven #creating a job script
 raven -t 30 -p 4 final_reads.fastq.gz
 ```
 ## 4. Trycycler
-[Trycycler](https://github.com/rrwick/Trycycler/wiki) is a multiple sequence aligner. It clusters the contif sequences, reconcile the alternative contig sequences, performs MSA, and constructs a consensus sequence from MSA. 
+[Trycycler](https://github.com/rrwick/Trycycler/wiki) is a multiple sequence aligner. 
+- It clusters the contif sequences, reconcile the alternative contig sequences, performs MSA, and constructs a consensus sequence from MSA. 
 ```
 conda create -n trycyler
 conda activate trycycler
@@ -215,9 +216,19 @@ CMake Error: The source directory "/home/ruchita.solanki/berkeleylab-metabat-108
 ```
 ## 2. MaxBin2
 [MaxBin2](https://sourceforge.net/projects/maxbin2/)
-- copy it on arc
+- copy it on arc in software directory
 ```
-
-
+tar -xvf MaxBin-2.2.7
+cd MaxBin-2.2.7
+cd src
+make
+cd .. #go back to MaxBin-2.2.7 directory
+./autobuild_auxiliary
+perl run_MaxBin.pl -h
 ```
 ## 3. Vamb
+[Vamb](https://github.com/RasmussenLab/vamb)
+```
+pip install vamb
+vamb --outdir  --fasta /path/to/catalogue.fna.gz --bamfiles /path/to/bam/*.bam -o C–minfasta 500000
+```
