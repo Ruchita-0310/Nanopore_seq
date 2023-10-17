@@ -225,8 +225,17 @@ sbatch medaka
 wget https://bitbucket.org/berkeleylab/metabat/get/master.tar.gz
 tar xzvf master.tar.gz
 cd berkeleylab-metabat-*
-mkdir build && cd build && cmake /home/ruchita.solanki/berkeleylab-metabat-1087553d61dc/build
-CMake Error: The source directory "/home/ruchita.solanki/berkeleylab-metabat-1087553d61dc/build" does not appear to contain CMakeLists.txt.
+mkdir build && cd build && cmake /your/path/build
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+metabat2 -i racon3.fasta -o metabat_out -s 500000
 ```
 ## 2. MaxBin2
 [MaxBin2](https://sourceforge.net/projects/maxbin2/)
@@ -238,11 +247,45 @@ cd src
 make
 cd .. #go back to MaxBin-2.2.7 directory
 ./autobuild_auxiliary
-perl run_MaxBin.pl -h
+run_MaxBin.pl -h
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+run_MaxBin.pl -contig racon3.fasta -out maxbin_out 
 ```
 ## 3. Vamb
 [Vamb](https://github.com/RasmussenLab/vamb)
 ```
 pip install vamb
-vamb --outdir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/vamb --fasta /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/racon3.fasta --bamfiles /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/sorted.bam -–minfasta 500000
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+vamb --outdir out vamb/ --fasta racon3.fasta --bamfiles sorted.bam -o C 
+```
+## 4. MetaWRAP
+- You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the previous installation method. 
+```
+mamba create -y -n metawrap-env python=2.7
+mamba activate metawrap-env
+git clone https://github.com/bxlab/metaWRAP.git
+mkdir MY_CHECKM_FOLDER
+cd MY_CHECKM_FOLDER
+wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+tar -xvf *.tar.gz
+rm *.gz
+cd ../
+mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
+
 ```
