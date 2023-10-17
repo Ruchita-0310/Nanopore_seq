@@ -164,7 +164,7 @@ minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz > /work/ebg_lab/eb/
 ###mapping -4
 minimap2 -ax map-ont -t 14 racon3.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/4minimap2.sam
 
-###
+###create indexing
 minimap2 -d catalogue.mmi final_reads.fastq.gz
 minimap2 
 ```
@@ -236,8 +236,9 @@ mkdir build && cd build && cmake /your/path/build
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-metabat2 -i racon3.fasta -o metabat_out -s 500000
+metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 ```
+- Produced 38 .fa files
 ## 2. MaxBin2
 [MaxBin2](https://sourceforge.net/projects/maxbin2/)
 - copy it on arc in software directory
@@ -258,8 +259,9 @@ run_MaxBin.pl -h
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-run_MaxBin.pl -contig racon3.fasta -out maxbin_out 
+run_MaxBin.pl -contig racon3.fasta -out wrap/maxbin_out 
 ```
+- Produced 15 .fasta files and 1 .tar.gz file
 ## 3. Vamb
 [Vamb](https://github.com/RasmussenLab/vamb)
 ```
@@ -276,7 +278,7 @@ pip install vamb
 vamb --outdir out vamb/ --fasta racon3.fasta --bamfiles sorted.bam -o C 
 ```
 ## 4. MetaWRAP
-- You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the previous installation method. 
+- You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the above mentioned installation method. 
 ```
 mamba create -y -n metawrap-env python=2.7
 mamba activate metawrap-env
