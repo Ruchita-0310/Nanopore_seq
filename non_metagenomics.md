@@ -55,3 +55,19 @@ trycycler cluster --assemblies *.fasta --reads final_reads.fastq.gz --out_dir tr
 for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ $i -gt 1 ]; then echo $directory; fi; done
 trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
 ```
+# Polishing
+## 1. Vamb
+[Vamb](https://github.com/RasmussenLab/vamb)
+```
+pip install vamb
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=15G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+vamb --outdir out vamb/ --fasta racon3.fasta --bamfiles sorted.bam -o C 
+```
