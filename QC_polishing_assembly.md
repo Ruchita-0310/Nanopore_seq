@@ -231,7 +231,7 @@ mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome 
 [CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html)
 ```
 conda activate metawrap-env
-conda install samtools==1.11 ##upgrade samtools!!
+conda install -c bioconda samtools ##install samtools!!
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
