@@ -13,6 +13,6 @@ gtdbtk classify_wf --genome_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passe
 conda create -n samtools-env
 conda activate samtools-env
 conda install -c bioconda samtools
-samtools view -Sb 3minimap3.sam -o 3minimap2.bam
-samtools sort -o sorted.bam 3minimap2.bam
+samtools view -Sb sam_file_name.sam -o bam_file_name.bam
+samtools sort -o sorted_bam_file_name.bam bam_file_name.bam
 ```
