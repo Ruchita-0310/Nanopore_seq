@@ -187,6 +187,22 @@ racon -t 14 assembly.fasta 3minimap2.sam racon2.fasta > racon3.fasta
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 Use it 2 times
 ```
+conda create -n py37env python=3.7
+conda activate py37env
+python --version #Python 3.7.16
+pip install medaka
+pip install numpy==1.21.6
+pip install tensorflow==2.10.0    
+conda install -c anaconda openssl
+
+conda install -c bioconda bcftools=1.11
+conda install -c bioconda bgzip     
+conda install -c bioconda minimap2 
+conda install -c bioconda samtools  
+conda install -c bioconda tabix=1.11  
+
+
+
 conda create -n medaka
 conda activate medaka
 conda install python=3.7 minimap2=2.17 
@@ -201,7 +217,7 @@ module load biobuilds/2017.11 #in medaka env because it has samtools, bgzip and 
 #SBATCH --mem=15G
 #SBATCH --partition=bigmem
 ####### Run your script #########################
-medaka_consensus -i final_reads.fastq.gz -d racon3.fast -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
+medaka_consensus -i final_reads.fastq.gz -d racon3.fasta -o medaka_out #-i input_reads.fasta, -d reference.fasta, -o output_directory
 sbatch medaka
 ```
 # Bining 
