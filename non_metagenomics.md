@@ -1,4 +1,4 @@
-# Things I tried, but didn't work
+# Things I tried, but didn't work for my project
 # Assembly
 ## 1. Canu - not the best for metagenomics
 [Canu](https://github.com/marbl/canu/releases) is an older assembly PIPELINE but still works very well. 
@@ -56,7 +56,7 @@ for directory in cluster*; do i=$(ls $directory/1_contigs/*.fasta| wc -l); if [ 
 trycycler reconcile --reads final_reads.fastq --cluster_dir good_clusters/cluster_001
 ```
 # Binning
-## 1. Vamb
+## 1. Vamb - will not work if you have less than 10,000 contigs!
 [Vamb](https://github.com/RasmussenLab/vamb)
 ```
 pip install vamb
