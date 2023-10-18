@@ -14,5 +14,5 @@ conda create -n samtools-env
 conda activate samtools-env
 conda install -c bioconda samtools
 samtools view -Sb sam_file_name.sam -o bam_file_name.bam
-samtools sort -o sorted_bam_file_name.bam bam_file_name.bam
+samtools sort -o sorted_bam_file_name.bam bam_file_name.bam --write-index
 ```
