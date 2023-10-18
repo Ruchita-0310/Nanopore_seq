@@ -228,6 +228,21 @@ rm *.gz
 cd ../
 mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
 ```
+For bin refinement
+```-c 90 -x 5``` the minimum completion is set to 90% and maximum contamination to 5%
+```
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+metawrap bin_refinement -o BIN_REFINEMENT -t 96 -A metabat2_bins/ -B maxbin2_bins/ -C fasta_bins/ -c 90 -x 5 
+
+```
 ## 4.4 CONCOCT
 [CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html)
 ```
