@@ -189,7 +189,7 @@ mkdir build && cd build && cmake /your/path/build
 conda activate metawrap-env
 metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 ```
-- Produced 38 .fa files
+- Produced 38 .fa files/bins 
 ## 4.2 MaxBin2
 [MaxBin2](https://sourceforge.net/projects/maxbin2/)
 - copy it on arc in software directory
@@ -213,38 +213,8 @@ run_MaxBin.pl -h
 conda activate metawrap-env
 run_MaxBin.pl -contig racon3.fasta -out wrap/maxbin_out 
 ```
-- Produced 15 .fasta files and 1 .tar.gz file
-## 4.3 MetaWRAP
-- You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the above mentioned installation method. 
-```
-mamba create -y -n metawrap-env python=2.7
-mamba activate metawrap-env
-git clone https://github.com/bxlab/metaWRAP.git
-mkdir MY_CHECKM_FOLDER
-cd MY_CHECKM_FOLDER
-wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
-tar -xvf *.tar.gz
-rm *.gz
-cd ../
-mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
-```
-For bin refinement
-- ```-c 90 -x 5``` the minimum completion is set to 90% and maximum contamination to 5%
-- ```-A``` is bins produced by metabat2, ```-B``` is bins produced by maxbin2, and ```-C``` is bins produced by CONCOCT
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=100G
-#SBATCH --partition=bigmem
-####### Run your script #########################
-metawrap bin_refinement -o BIN_REFINEMENT -t 96 -A metabat2_bins/ -B maxbin2_bins/ -C fasta_bins/ -c 90 -x 5 
-
-```
-## 4.4 CONCOCT
+- Produced 15 .fasta files/bins and 1 .tar.gz file
+## 4.3 CONCOCT
 [CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html)
 ```
 conda create -n concoct
@@ -271,6 +241,50 @@ merge_cutup_clustering.py concoct_output/clustering_gt1000.csv > concoct_output/
 mkdir concoct_output/fasta_bins
 extract_fasta_bins.py racon3.fasta concoct_output/clustering_merged.csv --output_path concoct_output/fasta_bins
 ```
+## 4.4 MetaWRAP
+- You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the above mentioned installation method. 
+```
+mamba create -y -n metawrap-env python=2.7
+mamba activate metawrap-env
+git clone https://github.com/bxlab/metaWRAP.git
+mkdir MY_CHECKM_FOLDER
+cd MY_CHECKM_FOLDER
+wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+tar -xvf *.tar.gz
+rm *.gz
+cd ../
+mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
+```
+For bin refinement
+- ```-c 90 -x 5``` the minimum completion is set to 90% and maximum contamination to 5%
+- ```-A``` is bins produced by metabat2, ```-B``` is bins produced by maxbin2, and ```-C``` is bins produced by CONCOCT
+- Make sure you have nothing other than .fasta or .fa files in your bin directories. 
+```
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+metawrap bin_refinement -o BIN_REFINEMENT -t 96 -A metabat2_bins/ -B maxbin2_bins/ -C fasta_bins/ -c 90 -x 5 
+```
+For reassembly
+```
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+####### Run your script #########################
+metawrap reassemble_bins -o BIN_REASSEMBLY -b metawrap_50_10_bins/ -1 final_reads_1.fastq -2 final_reads_2.fastq --nanopore final_reads.fastq.gz
+```
+
 # 5. Assembly processing 
 ## 5.1 CheckM
 ## 5.2 GTDB-Tk
