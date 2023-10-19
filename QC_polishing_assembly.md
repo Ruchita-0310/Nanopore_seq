@@ -171,12 +171,12 @@ sbatch medaka
 ```
 # 4. Bining 
 ## 4.1 MetaBAT2
-[MetaBAT2](https://bitbucket.org/berkeleylab/metabat/src/master/)
+[MetaBAT2](https://bitbucket.org/berkeleylab/metabat/src/master/) is statistical framework for reconstructing genomes from metagenomic data. 
 ```
 wget https://bitbucket.org/berkeleylab/metabat/get/master.tar.gz
 tar xzvf master.tar.gz
 cd berkeleylab-metabat-*
-mkdir build && cd build && cmake /your/path/build
+mkdir build && cd build && cmake /your/path/build && make && make test && make install
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --nodes=1
@@ -191,7 +191,7 @@ metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 ```
 - Produced 38 .fa files/bins 
 ## 4.2 MaxBin2
-[MaxBin2](https://sourceforge.net/projects/maxbin2/)
+[MaxBin2](https://sourceforge.net/projects/maxbin2/) is a software for binning assembled metagenomic sequences
 - copy it on arc in software directory
 ```
 tar -xvf MaxBin-2.2.7
@@ -215,7 +215,7 @@ run_MaxBin.pl -contig racon3.fasta -out wrap/maxbin_out
 ```
 - Produced 15 .fasta files/bins and 1 .tar.gz file
 ## 4.3 CONCOCT
-[CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html)
+[CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html) does unsupervised binning of metagenomic contigs by using nucleotide composition - kmer frequencies - and coverage data for multiple samples. CONCOCT can accurately (up to species level) bin metagenomic contigs.
 ```
 conda create -n concoct
 conda activate concoct
@@ -242,6 +242,7 @@ mkdir concoct_output/fasta_bins
 extract_fasta_bins.py racon3.fasta concoct_output/clustering_merged.csv --output_path concoct_output/fasta_bins
 ```
 ## 4.4 MetaWRAP
+[MetaWRAP](https://github.com/bxlab/metaWRAP) 
 - You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the above mentioned installation method. 
 ```
 mamba create -y -n metawrap-env python=2.7
@@ -255,7 +256,7 @@ rm *.gz
 cd ../
 mamba install biopython blas=2.5 blast=2.6.0 bmtagger bowtie2 bwa checkm-genome fastqc krona=2.7 matplotlib maxbin2 megahit metabat2 pandas prokka quast r-ggplot2 r-recommended salmon samtools=1.9 seaborn spades trim-galore concoct=1.0 pplacer
 ```
-For bin refinement
+For [bin refinement](https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md) follow step 5
 - ```-c 90 -x 5``` the minimum completion is set to 90% and maximum contamination to 5%
 - ```-A``` is bins produced by metabat2, ```-B``` is bins produced by maxbin2, and ```-C``` is bins produced by CONCOCT
 - Make sure you have nothing other than .fasta or .fa files in your bin directories. 
@@ -271,7 +272,7 @@ For bin refinement
 ####### Run your script #########################
 metawrap bin_refinement -o BIN_REFINEMENT -t 96 -A metabat2_bins/ -B maxbin2_bins/ -C fasta_bins/ -c 90 -x 5 
 ```
-For reassembly
+For [reassembly](https://github.com/bxlab/metaWRAP/blob/master/Usage_tutorial.md) follow step 8
 ```
 #!/bin/bash
 ####### Reserve computing resources #############
