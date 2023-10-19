@@ -289,4 +289,19 @@ metawrap reassemble_bins -o BIN_REASSEMBLY -b metawrap_50_10_bins/ -1 final_read
 # 5. Assembly processing 
 ## 5.1 CheckM
 ## 5.2 GTDB-Tk
+# GTDB-TK
+```
+conda create -n gtdbtk-2.3.2 -c conda-forge -c bioconda gtdbtk=2.3.2
+download-db.sh
+conda activate gtdbtk-2.3.2
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --mem=100G
+#SBATCH --partition=bigmem
+gtdbtk classify_wf --genome_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/wrap/BIN_REFINEMENT/metawrap_50_10_bins --out_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/wrap/BIN_REFINEMENT/metawrap_50_10_bins/classify_out --skip_ani_screen --extension fa
+```
 ## 5.3 Prodigal
