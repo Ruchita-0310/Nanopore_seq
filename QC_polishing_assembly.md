@@ -192,7 +192,20 @@ metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 ```
 - Produced 38 .fa files/bins 
 # 5. Assembly processing 
-## 5.1 CheckM
+## 5.1 CheckM2
+```
+#!/bin/bash
+#SBATCH --job-name=checkm2_1 
+#SBATCH --nodes=1               
+#SBATCH --ntasks=1               
+#SBATCH --cpus-per-task=30          
+#SBATCH --mem=50G                  
+#SBATCH --time=10:00:00          
+#SBATCH --output=checkm2_1%j.log
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate checkm2
+checkm2 predict -t 30 -x fa --input ./ --output-directory ./CheckM2 
+```
 ## 5.2 GTDB-Tk
 # GTDB-TK
 ```
