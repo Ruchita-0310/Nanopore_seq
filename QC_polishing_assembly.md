@@ -97,7 +97,26 @@ racon -t 14 assembly.fasta 2minimap2.sam racon1.fasta > racon2.fasta
 ###polishing -3
 racon -t 14 assembly.fasta 3minimap2.sam racon2.fasta > racon3.fasta
 ```
-## 3.3 Medaka 
+## 3.3 Proovframe
+- You will need [Diamond](https://github.com/bbuchfink/diamond/wiki) 
+```
+#diamond
+mkdir diamond-dir
+mv diamond-linux64.tar.gz diamond-dir/
+cd diamond-dir
+tar xzf diamond-linux64.tar.gz
+export PATH="$PATH:/path/to/diamond-dir"
+echo $PATH
+
+#proovframe
+git clone https://github.com/thackl/proovframe
+export PATH="$PATH:$/path/to/proovframe/bin"
+echo 'export PATH="$PATH:/path/to/proovframe/bin"' >> ~/.bashrc
+source ~/.bashrc
+####### Run your script #########################
+proovframe map -t 50 -a all_proteins.faa -o proovframe/raw-seqs.tsv racon3.fasta
+```
+## 3.4 Medaka 
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
 Use it 2 times
 ```
