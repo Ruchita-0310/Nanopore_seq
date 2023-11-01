@@ -1,6 +1,7 @@
 # Things I tried, but didn't work for my project
 # Assembly
-## 1. Canu - not the best for metagenomics
+## 1. Canu 
+- not the best for metagenomics
 [Canu](https://github.com/marbl/canu/releases) is an older assembly PIPELINE but still works very well. 
 All reads are assumed to be raw and untrimmed because it does the trimming and correction
 (https://canu.readthedocs.io/en/latest/tutorial.html)
@@ -10,7 +11,8 @@ tar -xJf canu-2.2.Linux.tar.xz
 nano canu 
 canu -useGrid=remote -p cyano -d cyano genomeSize=4m maxInputCoverage=100 -nanopore passed_reads.fastq.gz
 ```
-## 2. Raven - not the best for metagenomics
+## 2. Raven 
+- not the best for metagenomics
 [Raven](https://github.com/lbcb-sci/raven) is a de novo genome assembler for long uncorrected reads.
 ```
 conda -n raven #created new env 
@@ -20,7 +22,8 @@ nano raven
 ####### Run your script #########################
 raven -t 30 -p 4 final_reads.fastq.gz
 ```
-## 3. Trycycler - not the best for metagenomics
+## 3. Trycycler 
+- not the best for metagenomics
 [Trycycler](https://github.com/rrwick/Trycycler/wiki) is a multiple sequence aligner. 
 - It clusters the contif sequences, reconcile the alternative contig sequences, performs MSA, and constructs a consensus sequence from MSA. 
 ```
@@ -48,7 +51,7 @@ vamb --outdir out vamb/ --fasta racon3.fasta --bamfiles sorted.bam -o C
 ```
 ## 2. MaxBin2 
 - used metabat2 instead because it gave more bins
-[MaxBin2](https://sourceforge.net/projects/maxbin2/) is a software for binning assembled metagenomic sequences
+- [MaxBin2](https://sourceforge.net/projects/maxbin2/) is a software for binning assembled metagenomic sequences
 - copy it on arc in software directory
 ```
 tar -xvf MaxBin-2.2.7
@@ -66,7 +69,9 @@ run_MaxBin.pl -contig racon3.fasta -out wrap/maxbin_out
 - Produced 15 .fasta files/bins and 1 .tar.gz file
 ## 3. CONCOCT 
 - used metabat2 instead because it gave more bins
-[CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html) does unsupervised binning of metagenomic contigs by using nucleotide composition - kmer frequencies - and coverage data for multiple samples. CONCOCT can accurately (up to species level) bin metagenomic contigs.
+- [CONCOCT](https://concoct.readthedocs.io/en/latest/usage.html) does unsupervised binning of metagenomic contigs by using nucleotide
+composition - kmer frequencies - and coverage data for multiple samples. CONCOCT can accurately (up to species level) bin metagenomic
+contigs.
 ```
 conda create -n concoct
 conda activate concoct
@@ -94,7 +99,7 @@ extract_fasta_bins.py racon3.fasta concoct_output/clustering_merged.csv --output
 ```
 ## 4. MetaWRAP 
 - not need since only one binning tool was used
-[MetaWRAP](https://github.com/bxlab/metaWRAP) 
+- [MetaWRAP](https://github.com/bxlab/metaWRAP) 
 - You will install metaBAT2 and maxbin2 when you install metawrap. If you want you can skip the above mentioned installation method. 
 ```
 mamba create -y -n metawrap-env python=2.7
