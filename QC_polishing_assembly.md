@@ -98,6 +98,8 @@ racon -t 14 assembly.fasta 2minimap2.sam racon1.fasta > racon2.fasta
 racon -t 14 assembly.fasta 3minimap2.sam racon2.fasta > racon3.fasta
 ```
 ## 3.3 Proovframe
+- [Proovframe](https://github.com/thackl/proovframe) detects and corrects frameshifts in coding sequences from raw long reads or long-read
+derived assemblies.
 - You will need [Diamond](https://github.com/bbuchfink/diamond/wiki) 
 ```
 #diamond
