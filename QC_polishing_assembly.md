@@ -3,10 +3,6 @@ Before doing any quality control, concatenate all the passed reads into one file
 ```
 cat ./fastq_pass/*.fastq.gz > passed_reads.fastq.gz
 ```
-```
-squeue -u ruchita.solanki
-watch squeue -u ruchita.solanki #command to see what is running
-```
 ## 1.1 Porechop
 [Porechop](https://github.com/rrwick/Porechop) eventhough it is no longer available, you could still use
 it. 
@@ -15,14 +11,6 @@ Guppy basecaller does the adapter trimming. Still better to use porechop.
 conda create -n porechop #created new env
 conda activate porechop
 conda install -c bioconda porechop
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=15G
-#SBATCH --partition=bigmem
 ####### Run your script #########################
 porechop -i passed_reads.fastq.gz -o passed_reads_trimmed.fastq.gz -t 12
 sbatch porechop
@@ -45,17 +33,9 @@ I used 80% and 95% and will compared it using flye.
 module load python/3.10.4
 pip3 install NanoPlot
 nano nanoplot #creating a job script
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=1G
-#SBATCH --partition=cpu2019
 ####### Run your script #########################
 NanoPlot -t 8 --fastq final_reads.fastq.gz --maxlength 4000000 --plots dot --legacy hex
-sbatch nanoplot_test.sbatch #command to run job script
+sbatch nanoplot_test.sbatch
 ```
 # 2. Assembly
 ## 2.1 Flye - works well for metagenomics 
@@ -64,14 +44,6 @@ sbatch nanoplot_test.sbatch #command to run job script
 conda install -c bioconda flye #in filtlong env
 conda activate filtlong
 nano flye #creating a job script
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=15G
-#SBATCH --partition=bigmem
 ####### Run your script #########################
 flye --nano-raw final_reads.fastq.gz --meta --genome-size 15m --out-dir assembly_flye -i 0 --threads 8
 sbatch flye
@@ -93,15 +65,7 @@ reference database.
 conda create -n minisuite
 conda activate minisuite
 conda install -c bioconda minimap2
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=100G
-#SBATCH --partition=bigmem
-conda activate minisuite
+####### Run your script #########################
 ###mapping -1
 minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/minimap2.sam
 ###mapping -2
@@ -125,15 +89,7 @@ do not include a consensus step.
 conda create -n racon
 conda activate racon
 conda install -c bioconda racon
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=100G
-#SBATCH --partition=bigmem
-conda activate racon
+####### Run your script #########################
 ###polishing -1 
 racon -t 14 assembly.fasta minimap2.sam final_reads.fastq.gz > racon1.fasta
 ###polishing -2
@@ -156,14 +112,6 @@ conda install -c bioconda bgzip
 conda install -c bioconda minimap2 
 conda install -c bioconda samtools  
 conda install -c bioconda tabix=1.11  
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=8
-#SBATCH --time=7-00:00:00
-#SBATCH --mem=200G
-#SBATCH --partition=cpu2021,cpu2023
 ####### Run your script #########################
 ##Run 1
 medaka_consensus -i final_reads.fastq.gz -d racon3.fasta -o medaka_out -m r941_e81_fast_g514
@@ -178,14 +126,6 @@ wget https://bitbucket.org/berkeleylab/metabat/get/master.tar.gz
 tar xzvf master.tar.gz
 cd berkeleylab-metabat-*
 mkdir build && cd build && cmake /your/path/build && make && make test && make install
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=15G
-#SBATCH --partition=bigmem
 ####### Run your script #########################
 conda activate metawrap-env
 metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
@@ -194,14 +134,7 @@ metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 # 5. Assembly processing 
 ## 5.1 CheckM2
 ```
-#!/bin/bash
-#SBATCH --job-name=checkm2_1 
-#SBATCH --nodes=1               
-#SBATCH --ntasks=1               
-#SBATCH --cpus-per-task=30          
-#SBATCH --mem=50G                  
-#SBATCH --time=10:00:00          
-#SBATCH --output=checkm2_1%j.log
+####### Run your script #########################
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate checkm2
 checkm2 predict -t 30 -x fa --input ./ --output-directory ./CheckM2 
@@ -212,14 +145,7 @@ checkm2 predict -t 30 -x fa --input ./ --output-directory ./CheckM2
 conda create -n gtdbtk-2.3.2 -c conda-forge -c bioconda gtdbtk=2.3.2
 download-db.sh
 conda activate gtdbtk-2.3.2
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=100G
-#SBATCH --partition=bigmem
-gtdbtk classify_wf --genome_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/wrap/BIN_REFINEMENT/metawrap_50_10_bins --out_dir /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/wrap/BIN_REFINEMENT/metawrap_50_10_bins/classify_out --skip_ani_screen --extension fa
+####### Run your script #########################
+gtdbtk classify_wf --genome_dir /path/to/metawrap_50_10_bins --out_dir /path/to/output/directory --skip_ani_screen --extension fa
 ```
 ## 5.3 Prodigal
