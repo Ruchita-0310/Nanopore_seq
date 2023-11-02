@@ -9,9 +9,15 @@ samtools sort -o sort.bam bam_file_name.bam --write-index
 ```
 # CheckM2
 ```
-git clone --recursive https://github.com/chklovski/checkm2.git && cd checkm2
+git clone --recursive https://github.com/chklovski/checkm2.git
+cd checkm2
 conda env create -n checkm2 -f checkm2.yml
 conda activate checkm2
 python setup.py install
 conda activate checkm2
+
+mamba create -n checkm2 -c bioconda -c conda-forge checkm2
+mamba activate checkm2
+mamba install python=3.8
+checkm2 database --download
 ```
