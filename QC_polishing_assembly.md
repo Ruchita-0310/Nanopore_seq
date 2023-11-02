@@ -159,8 +159,11 @@ metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 # 5. Assembly processing 
 ## 5.1 CheckM2
 ```
+mamba create -n checkm2 -c bioconda -c conda-forge checkm2
+mamba activate checkm2
+mamba install python=3.8
+checkm2 database --download
 ####### Run your script #########################
-source ~/miniconda3/etc/profile.d/conda.sh
 conda activate checkm2
 checkm2 predict -t 30 -x fa --input ./ --output-directory ./CheckM2 
 ```
