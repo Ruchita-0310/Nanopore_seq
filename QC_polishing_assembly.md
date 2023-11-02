@@ -168,7 +168,6 @@ conda activate checkm2
 checkm2 predict -t 30 -x fa --input ./ --output-directory ./CheckM2 
 ```
 ## 5.2 GTDB-Tk
-# GTDB-TK
 ```
 conda create -n gtdbtk-2.3.2 -c conda-forge -c bioconda gtdbtk=2.3.2
 download-db.sh
