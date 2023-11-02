@@ -115,8 +115,12 @@ git clone https://github.com/thackl/proovframe
 export PATH="$PATH:$/path/to/proovframe/bin"
 echo 'export PATH="$PATH:/path/to/proovframe/bin"' >> ~/.bashrc
 source ~/.bashrc
-####### Run your script #########################
+# map proteins to reads
+# make directory named proovframe
 proovframe map -t 50 -a all_proteins.faa -o proovframe/raw-seqs.tsv racon3.fasta
+# fix frameshifts in reads
+# run it in proovframe directory
+proovframe fix -o corrected-seqs.fa racon3.fasta raw-seqs.tsv
 ```
 ## 3.4 Medaka 
 [Medaka](https://github.com/nanoporetech/medaka) a tool to create consensus sequences
