@@ -1,26 +1,10 @@
 # Install Dorado
 ```
-tar xf ont-dorado-server_7.1.4_linux64.tar.gz
-```
-
-## Find Dorado server config
-```
-ont-dorado-server/bin/dorado_basecall_server --print_workflows
-```
-Need this - FLO-MIN106     SQK-LSK109                  dna_r9.4.1_450bps_hac    
-## Install pod5
-```
-pip3 install pod5
-```
-### Convert .fast5 to .pod5 files
-```
-cd ~/Downloads/pod5/tools
-python3 -m main convert fast5 ~/Downloads/*.fast5 --output ~/Downloads/
-```
-
-Transfer .pod5 file from local machine to ARC
-```
-scp ~/Downloads/output.pod5 arc@server:/path/to/your/directory
+tar xf dorado-0.5.3-linux-x64.tar.gz
+nano ~/.bashrc
+PATH="/home/dorado-0.5.3-linux-x64/bin/:$PATH"
+source ~/.bashrc
+dorado -h
 ```
 
 ## Start run Dorado on ARC server
