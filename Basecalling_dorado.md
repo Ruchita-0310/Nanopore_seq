@@ -22,9 +22,10 @@ nano basecalling.txt
 #SBATCH --partition=bigmem
 ####### Run your script #########################
 #!/bin/bash
-dorado basecaller dna_r10.4.1_e8.2_400bps_hac@v4.3.0 /home/ruchita.solanki/RS_pro_euk_8_march_2024/5_cyano_1_diatom/20240308_1728_MN43493_FAY02195_b15e91ef/pod5_pass/barcode01/b06/ -x cpu --kit-name SQK-NBD1$
+dorado basecaller dna_r10.4.1_e8.2_400bps_hac@v4.3.0 /path/to/pod5/files/ -x cpu --kit-name SQK-NBD1$ 
 sbatch bascalling.txt
 ```
 `dna_r10.4.1_e8.2_400bps_hac@v4.3.0` the one I used
+You can run it on GPU as well as CPU. 
 
 
