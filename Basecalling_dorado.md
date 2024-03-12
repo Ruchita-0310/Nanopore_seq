@@ -26,6 +26,6 @@ dorado basecaller dna_r10.4.1_e8.2_400bps_hac@v4.3.0 /path/to/pod5/files/ -x cpu
 sbatch bascalling.txt
 ```
 `dna_r10.4.1_e8.2_400bps_hac@v4.3.0` the one I used.
-You can run it on GPU as well as CPU. 
+- You can run it on GPU as well as CPU. 
 
 
