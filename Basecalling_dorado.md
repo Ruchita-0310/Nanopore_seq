@@ -13,7 +13,7 @@ https://github.com/nanoporetech/dorado
 dorado download --model all
 ####### Run your script #########################
 #!/bin/bash
-dorado basecaller dna_r10.4.1_e8.2_400bps_hac@v4.3.0 /path/to/pod5/files/ -x cpu --kit-name SQK-NBD1$ 
+dorado basecaller dna_r10.4.1_e8.2_400bps_hac@v4.3.0 /path/to/pod5/files/ -x cpu --kit-name SQK-NBD114-24 > calls.bam
 sbatch bascalling.txt
 ```
 - `dna_r10.4.1_e8.2_400bps_hac@v4.3.0` the one I used.
