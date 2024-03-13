@@ -76,14 +76,6 @@ contigs.
 conda create -n concoct
 conda activate concoct
 conda install -c bioconda concoct
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --nodes=1
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=4
-#SBATCH --time=24:00:00
-#SBATCH --mem=15G
-#SBATCH --partition=bigmem
 ####### Run your script #########################
 ###cut contigs into smaller parts
 cut_up_fasta.py racon3.fasta -c 10000 -o 0 --merge_last -b contigs_10K.bed > contigs_10K.fa
