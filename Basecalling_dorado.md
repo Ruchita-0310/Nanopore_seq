@@ -16,7 +16,7 @@ dorado download --model all
 dorado basecaller dna_r10.4.1_e8.2_400bps_hac@v4.3.0 /path/to/pod5/files/ -x cpu --kit-name SQK-NBD114-24 > calls.bam
 sbatch bascalling.txt
 ```
-- `dna_r10.4.1_e8.2_400bps_hac@v4.3.0` the one I used.
+- `dna_r10.4.1_e8.2_400bps_hac@v4.3.0` is the model I used.
 - You can run it on GPU as well as CPU. CPU will take a while to run, so make small subdirectories and do basecalling.
 
 
