@@ -23,4 +23,5 @@ sbatch bascalling.txt
 dorado trim calls.bam > trimmed.bam
 sbatch trimming.txt
 ```
-You can add `--emit fastq` instead of creating bam files. Alternatively you can use samtools to convert bam to fastq files.
+- You can add `--emit fastq` instead of creating bam files. Alternatively you can use samtools to convert bam to fastq files.
+- Dorado trim will trim adapters, barcodes, and primers. You can choose what you want it to trim as well. 
