@@ -21,5 +21,6 @@ sbatch bascalling.txt
 ```
 ####### Run your script #########################
 dorado trim calls.bam > trimmed.bam
+sbatch trimming.txt
 ```
 You can add `--emit fastq` instead of creating bam files. Alternatively you can use samtools to convert bam to fastq files.
