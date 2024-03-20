@@ -67,13 +67,13 @@ conda activate minisuite
 conda install -c bioconda minimap2
 ####### Run your script #########################
 ###mapping -1
-minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz > minimap2.sam
+minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz > 1minimap01.sam
 ###mapping -2
-minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz > 2minimap2.sam
+minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz > 2minimap01.sam
 ###mapping -3
-minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz > 3minimap2.sam
+minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz > 3minimap01.sam
 ###mapping -4
-minimap2 -ax map-ont -t 14 racon3.fasta final_reads.fastq.gz > 4minimap2.sam
+minimap2 -ax map-ont -t 14 racon3.fasta final_reads.fastq.gz > 4minimap01.sam
 
 ###create indexing
 minimap2 -d catalogue.mmi final_reads.fastq.gz
@@ -90,12 +90,12 @@ conda create -n racon
 conda activate racon
 conda install -c bioconda racon
 ####### Run your script #########################
-###polishing -1 
-racon -t 14 assembly.fasta minimap2.sam final_reads.fastq.gz > racon1.fasta
-###polishing -2
-racon -t 14 assembly.fasta 2minimap2.sam racon1.fasta > racon2.fasta
-###polishing -3
-racon -t 14 assembly.fasta 3minimap2.sam racon2.fasta > racon3.fasta
+#polishing -1 
+racon -t 14 t01.fastq 1minimap01.sam assembly01.fasta > racon01.fasta
+#polishing -2
+racon -t 14 racon01.fasta 2minimap2.sam assembly01.fasta > racon02.fasta
+#polishing -3
+racon -t 14 racon02.fasta 3minimap2.sam assembly01.fasta > racon03.fasta
 ```
 ## 3.3 Proovframe
 - [Proovframe](https://github.com/thackl/proovframe) detects and corrects frameshifts in coding sequences from raw long reads or long-read
