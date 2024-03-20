@@ -67,13 +67,13 @@ conda activate minisuite
 conda install -c bioconda minimap2
 ####### Run your script #########################
 ###mapping -1
-minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/minimap2.sam
+minimap2 -ax map-ont -t 14 assembly.fasta final_reads.fastq.gz > minimap2.sam
 ###mapping -2
-minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/2minimap2.sam
+minimap2 -ax map-ont -t 14 racon1.fasta final_reads.fastq.gz > 2minimap2.sam
 ###mapping -3
-minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/3minimap2.sam
+minimap2 -ax map-ont -t 14 racon2.fasta final_reads.fastq.gz > 3minimap2.sam
 ###mapping -4
-minimap2 -ax map-ont -t 14 racon3.fasta final_reads.fastq.gz > /work/ebg_lab/eb/Ruchita_working/nano_data/passed_qc/assembly_flye_1/4minimap2.sam
+minimap2 -ax map-ont -t 14 racon3.fasta final_reads.fastq.gz > 4minimap2.sam
 
 ###create indexing
 minimap2 -d catalogue.mmi final_reads.fastq.gz
