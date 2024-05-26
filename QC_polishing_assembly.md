@@ -149,6 +149,7 @@ metabat2 -i racon3.fasta -o wrap/metabat_out -s 500000
 - Produced 38 .fa files/bins 
 # 5. Assembly processing 
 ## 5.1 CheckM2
+[CheckM2](https://github.com/chklovski/CheckM2)
 ```
 mamba create -n checkm2 -c bioconda -c conda-forge checkm2
 mamba activate checkm2
@@ -159,6 +160,7 @@ conda activate checkm2
 checkm2 predict -t 30 -x fa --input ./ --output-directory ./CheckM2 
 ```
 ## 5.2 GTDB-Tk
+[GTDB-Tk](https://github.com/Ecogenomics/GTDBTk)
 ```
 conda create -n gtdbtk-2.3.2 -c conda-forge -c bioconda gtdbtk=2.3.2
 download-db.sh
@@ -167,3 +169,4 @@ conda activate gtdbtk-2.3.2
 gtdbtk classify_wf --genome_dir /path/to/metawrap_50_10_bins --out_dir /path/to/output/directory --skip_ani_screen --extension fa
 ```
 ## 5.3 Prodigal
+[Prodigal](https://github.com/hyattpd/prodigal/wiki)
