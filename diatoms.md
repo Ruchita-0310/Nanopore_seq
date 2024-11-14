@@ -143,7 +143,7 @@ Exploring genome for potential telomeric repeats between lengths 5 and 12. Canon
 ## 1. MetaErg 
 ```
 ####### Run your script #########################
-\time  singularity exec --bind /work/ebg_lab/referenceDatabases/metaerg_db_V214:/databases --bind /home/ruchita.solanki/dorado/flye_out:/data  --writable /work/ebg_lab/software/metaerg-v2.5.2/sandbox_metaerg_2.5.4/ metaerg -- database_dir /databases --contig_file /data --file_extension .fasta
+\time  singularity exec --bind /work/ebg_lab/referenceDatabases/metaerg_db_V214:/databases --bind /home/ruchita.solanki/dorado/flye_out:/data  --writable /work/ebg_lab/software/metaerg-v2.5.2/sandbox_metaerg_2.5.4/ metaerg --database_dir /databases --contig_file /data --file_extension .fasta
 ```
 ## 2. Barrnap
 ```
