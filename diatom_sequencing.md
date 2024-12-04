@@ -39,7 +39,7 @@ miniasm -s 30,000 -m 10,000 -c 5 -d 100,000 -f 5_trimmed.fastq minimap.paf > min
 #polishing -3
 racon -t 14 ../pass_trim.fastq.gz 3minimap01.sam racon02.fasta > racon03.fasta
 ```
-# 2. Minimap2 3X
+## 2. Minimap2 3X
 ```
 ####### Run your script #########################
 #minimap2 -ax map-ont -t 14 assembly01.fasta ../pass_trim.fastq.gz > 1minimap01.sam
@@ -48,7 +48,7 @@ racon -t 14 ../pass_trim.fastq.gz 3minimap01.sam racon02.fasta > racon03.fasta
 #mapping-3
 #minimap2 -ax map-ont -t 14 racon02.fasta ../pass_trim.fastq.gz > 3minimap01.sam
 ```
-# 3. Medaka 2X
+## 3. Medaka 2X
 ```
 ####### Run your script #########################
 medaka_consensus -i ../trimmed.fastq -d racon2.fasta -o medaka_out -m r1041_e82_400bps_hac_variant_v4.2.0
@@ -56,7 +56,7 @@ medaka_consensus -i ../trimmed.fastq -d racon2.fasta -o medaka_out -m r1041_e82_
 medaka_consensus -i ../trimmed.fastq -d consensus.fasta -o medaka2_out -m r1041_e82_400bps_hac_variant_v4.2.0
 ```
 
-# 4. Proovframe
+## 4. Proovframe
 ```
 ####### Run your script #########################
 proovframe map -t 50 -a diatoms_proteins.faa -o proovframe/raw-seqs.tsv racon3.fasta
@@ -95,14 +95,14 @@ busco --download stramenopile_odb10 #to download stramenophile database
 BUSCO has eukaryotes and stramenophile database. I tried both on metabat_out.1.fa and maxbin_out.010.fasta bins. 
 # EukRep-Pipeline 
 [Read](https://github.com/patrickwest/EukRep_Pipeline) before using 
-1. Classif with EukRep
+## 1. Classif with EukRep
 ```
 ####### Run your script #########################
 conda create -y -n eukrep-env -c bioconda scikit-learn==0.19.2 eukrep
 conda activate eukrep-env
 EukRep -i assembly.fasta -o euk_contigs.fa --min 1000
 ```
-2. Binning - using CONCOCT
+## 2. Binning - using CONCOCT
 ```
 ####### Run your script #########################
 conda activate concoct
@@ -117,7 +117,7 @@ merge_cutup_clustering.py concoct_output/clustering_gt1000.csv > concoct_output/
 mkdir concoct_output/fasta_bins
 extract_fasta_bins.py racon3.fasta concoct_output/clustering_merged.csv --output_path concoct_output/fasta_bins
 ```
-3. Train GeneMark-ES
+## 3. Train GeneMark-ES
 ```
 Download GeneMark-ES from http://topaz.gatech.edu/GeneMark/license_download.cgi
 tar -xvzf gmes_linux_64_4.tar.gz
